@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex, nofollow">
+<title>Yönetim Paneli · Athena Run Club</title>
+<link rel="icon" href="img/favicon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,500..900&family=Fraunces:ital,wght@1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#050f1f;--navy:#0c2a52;--gold:#e3a74f;--gold-d:#b9802f;--gold-l:#f7dca4;--ivory:#f5efe4;--paper:#fbf8f2;--mut:#6a7183;--hair:rgba(11,20,36,.12);--red:#c0392b;--green:#1f8a5b;
+--goldg:linear-gradient(100deg,#f7dca4 0%,#e3a74f 40%,#c58a35 70%,#e3a74f 100%);--disp:"Archivo","Arial Narrow",sans-serif;--body:"Inter",system-ui,sans-serif;--ease:cubic-bezier(.16,1,.3,1)}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:var(--body);background:var(--ivory);color:var(--ink);font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;min-height:100vh;padding-bottom:calc(90px + env(safe-area-inset-bottom))}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+a{color:inherit}
+.disp{font-family:var(--disp);font-stretch:75%;font-weight:900;text-transform:uppercase;line-height:.95}
+.wrap{width:min(860px,92vw);margin-inline:auto}
+
+/* top bar */
+.top{position:sticky;top:0;z-index:20;background:var(--ink);color:#fff;padding:calc(12px + env(safe-area-inset-top)) 0 12px}
+.top .wrap{display:flex;align-items:center;gap:12px}
+.bm{width:40px;height:40px;border-radius:50%;background:var(--ivory);display:grid;place-items:center;overflow:hidden;flex:none}
+.bm img{width:46px;mix-blend-mode:multiply}
+.top h1{font-family:var(--disp);font-stretch:115%;font-weight:800;font-size:13px;letter-spacing:.18em;line-height:1.2}
+.top h1 small{display:block;font-family:"Fraunces",serif;font-style:italic;font-weight:400;letter-spacing:0;font-size:12.5px;color:var(--gold-l);text-transform:none}
+.lang{display:flex;background:rgba(255,255,255,.1);border-radius:99px;padding:3px;margin-left:auto}
+.lang button{width:36px;height:28px;border-radius:99px;font-size:11px;font-weight:700;letter-spacing:.08em;color:rgba(255,255,255,.65)}
+.lang button.on{background:#fff;color:var(--ink)}
+.lang-login{width:max-content;margin:0 auto 26px}
+.mode{font-size:11px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 10px;border-radius:99px;background:rgba(255,255,255,.12)}
+.mode.live{background:rgba(31,138,91,.25);color:#9be3bf}
+.top a.view,.top button.out{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.08)}
+.top svg{width:18px;height:18px}
+
+/* login */
+.login{min-height:100vh;display:grid;place-items:center;background:var(--ink);color:#fff;padding:30px}
+.login-box{width:min(380px,100%);text-align:center}
+.login .bm{width:84px;height:84px;margin:0 auto 18px}
+.login .bm img{width:96px}
+.login h2{font-size:42px;margin-bottom:6px}
+.login p{color:rgba(255,255,255,.65);font-size:14.5px;margin-bottom:26px}
+.pin{width:100%;height:60px;border-radius:18px;border:1px solid rgba(255,255,255,.2);background:rgba(255,255,255,.06);text-align:center;font-size:24px;letter-spacing:.4em;color:#fff;outline:none}
+.pin:focus{border-color:var(--gold)}
+.err{color:#ff8a80;font-size:14px;min-height:22px;margin-top:10px}
+
+/* buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:50px;padding:0 22px;border-radius:99px;font-family:var(--disp);font-stretch:110%;font-weight:700;font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;transition:transform .3s var(--ease),opacity .3s}
+.btn:active{transform:scale(.97)}
+.btn-gold{background:var(--goldg);color:var(--ink)}
+.btn-ink{background:var(--navy);color:#fff}
+.btn-line{border:1px solid var(--hair);color:var(--navy);background:#fff}
+.btn-red{color:var(--red);border:1px solid rgba(192,57,43,.3);background:#fff}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.w100{width:100%}
+
+/* tabs */
+.tabs{position:fixed;left:0;right:0;bottom:0;z-index:20;background:rgba(255,255,255,.92);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--hair);padding:8px 0 calc(8px + env(safe-area-inset-bottom))}
+.tabs .wrap{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.tabs button{display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;border-radius:16px;font-size:12px;font-weight:600;color:var(--mut)}
+.tabs button svg{width:22px;height:22px}
+.tabs button.on{background:var(--navy);color:#fff}
+
+main{padding:26px 0}
+.head{display:flex;align-items:end;justify-content:space-between;gap:16px;margin-bottom:18px}
+.head h2{font-size:clamp(34px,8vw,52px);color:var(--navy)}
+.head p{color:var(--mut);font-size:14px;margin-top:4px}
+.banner{padding:14px 16px;border-radius:16px;background:#fff6e5;border:1px solid rgba(227,167,79,.5);font-size:13.5px;color:#7a5520;margin-bottom:18px}
+.sub{font-size:12px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-d);margin:22px 0 10px}
+
+/* list items */
+.item{display:grid;grid-template-columns:62px minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px;border-radius:20px;background:#fff;border:1px solid var(--hair);margin-bottom:10px;cursor:pointer;transition:transform .3s var(--ease),box-shadow .3s}
+.item:hover{box-shadow:0 14px 30px -22px rgba(5,15,31,.5);transform:translateY(-2px)}
+.d{height:62px;border-radius:16px;background:var(--navy);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;line-height:1}
+.d b{font-family:var(--disp);font-stretch:72%;font-weight:900;font-size:28px}
+.d span{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--gold-l);margin-top:3px}
+.item.past .d{background:#c9ced8}
+.item.cancel h4{text-decoration:line-through;opacity:.6}
+.item h4{font-family:var(--disp);font-stretch:88%;font-weight:900;font-size:18px;text-transform:uppercase;color:var(--navy);line-height:1.05;overflow:hidden;text-overflow:ellipsis}
+.item .meta{font-size:13px;color:var(--mut);margin-top:3px}
+.tag{display:inline-block;font-size:10.5px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;padding:3px 8px;border-radius:99px;background:rgba(12,42,82,.08);color:var(--navy);margin-right:4px}
+.tag.red{background:#fde3e1;color:var(--red)}.tag.gold{background:rgba(227,167,79,.22);color:var(--gold-d)}
+.chev{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:var(--ivory);color:var(--navy)}
+.chev svg{width:16px;height:16px}
+.empty{padding:34px 20px;border-radius:20px;border:1px dashed var(--hair);text-align:center;color:var(--mut);background:rgba(255,255,255,.5)}
+details.past summary{cursor:pointer;color:var(--mut);font-size:14px;margin:18px 0 10px}
+.fab{position:fixed;right:max(4vw,calc((100vw - 860px)/2));bottom:calc(92px + env(safe-area-inset-bottom));z-index:21;height:58px;padding:0 24px;box-shadow:0 18px 40px -14px rgba(227,167,79,.9)}
+
+/* form sheet */
+.sheet-bg{position:fixed;inset:0;z-index:40;background:rgba(5,15,31,.55);opacity:0;pointer-events:none;transition:opacity .35s}
+.sheet{position:fixed;left:0;right:0;bottom:0;z-index:41;max-height:92vh;overflow:auto;background:var(--paper);border-radius:28px 28px 0 0;padding:10px 0 calc(24px + env(safe-area-inset-bottom));transform:translateY(105%);transition:transform .5s var(--ease)}
+.open .sheet{transform:none}.open .sheet-bg{opacity:1;pointer-events:auto}
+@media (max-width:420px){.mode{display:none}}
+@media (min-width:760px){.sheet{left:50%;right:auto;bottom:auto;top:50%;width:620px;border-radius:28px;transform:translate(-50%,-46%) scale(.96);opacity:0;pointer-events:none;transition:transform .45s var(--ease),opacity .3s}.open .sheet{transform:translate(-50%,-50%);opacity:1;pointer-events:auto}}
+.grab{width:44px;height:5px;border-radius:5px;background:var(--hair);margin:0 auto 14px}
+.sheet .wrap{width:auto;padding:0 22px}
+.sheet h3{font-size:30px;color:var(--navy);margin-bottom:16px}
+.f{display:block;margin-bottom:14px}
+.f>span{display:block;font-size:12.5px;font-weight:600;color:var(--navy);margin-bottom:6px}
+.f>span em{font-style:normal;color:var(--mut);font-weight:400}
+.f input,.f select,.f textarea{width:100%;height:50px;padding:0 14px;border-radius:14px;border:1px solid var(--hair);background:#fff;outline:none;transition:border-color .2s,box-shadow .2s;font-size:16px}
+.f textarea{height:auto;min-height:96px;padding:12px 14px;resize:vertical}
+.f input:focus,.f select:focus,.f textarea:focus{border-color:var(--gold);box-shadow:0 0 0 4px rgba(227,167,79,.18)}
+.row2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:14px;border-radius:14px;background:#fff;border:1px solid var(--hair);margin-bottom:14px;font-size:14.5px;font-weight:500}
+.toggle input{appearance:none;width:50px;height:30px;border-radius:30px;background:#d6dae2;position:relative;cursor:pointer;transition:background .3s;flex:none}
+.toggle input::after{content:"";position:absolute;top:3px;left:3px;width:24px;height:24px;border-radius:50%;background:#fff;box-shadow:0 2px 6px rgba(0,0,0,.2);transition:transform .3s var(--ease)}
+.toggle input:checked{background:var(--gold)}
+.toggle input:checked::after{transform:translateX(20px)}
+.actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.actions .btn-gold{flex:1}
+
+/* toast */
+.toast{position:fixed;left:50%;top:calc(76px + env(safe-area-inset-top));z-index:60;transform:translate(-50%,-30px);opacity:0;padding:12px 18px;border-radius:99px;background:var(--ink);color:#fff;font-size:14px;font-weight:500;box-shadow:0 14px 30px -12px rgba(0,0,0,.5);transition:transform .4s var(--ease),opacity .3s;pointer-events:none;white-space:nowrap}
+.toast.show{transform:translate(-50%,0);opacity:1}
+.toast.err{background:var(--red)}
+.spin{width:18px;height:18px;border-radius:50%;border:2px solid currentColor;border-right-color:transparent;animation:sp .7s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+[hidden]{display:none!important}
+</style>
+</head>
+<body>
+
+<!-- LOGIN -->
+<section class="login" id="login">
+  <div class="login-box"><div class="lang lang-login" role="group" aria-label="Language"><button type="button" data-lang="tr">TR</button><button type="button" data-lang="en">EN</button></div>
+    <div class="bm"><img src="img/mark.png" alt=""></div>
+    <h2 class="disp" data-t="lg1">Koç Paneli</h2>
+    <p id="loginHint" data-t="lg2">Koşuları ve duyuruları buradan yönet. Devam etmek için PIN kodunu gir.</p>
+    <form id="loginForm">
+      <input class="pin" id="pin" type="password" inputmode="numeric" autocomplete="current-password" placeholder="••••" aria-label="PIN">
+      <button class="btn btn-gold w100" style="margin-top:14px;height:56px" id="loginBtn" data-t="lg3">Giriş yap</button>
+    </form>
+    <div class="err" id="loginErr"></div>
+  </div>
+</section>
+
+<!-- APP -->
+<div id="app" hidden>
+  <header class="top">
+    <div class="wrap">
+      <span class="bm"><img src="img/mark.png" alt=""></span>
+      <h1>ATHENA RUN CLUB<small data-t="tp1">Koç paneli</small></h1>
+      <div class="lang" role="group" aria-label="Language"><button type="button" data-lang="tr">TR</button><button type="button" data-lang="en">EN</button></div><span class="mode" id="modeBadge">Demo</span>
+      <a class="view" href="index.html#schedule" target="_blank" rel="noopener" aria-label="Siteyi gör" title="Siteyi gör"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg></a>
+      <button class="out" id="logout" aria-label="Çıkış" title="Çıkış"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3"/></svg></button>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <div class="banner" id="demoBanner" hidden><span data-t="bn1"><b>Demo modu.</b> Değişiklikler yalnızca bu tarayıcıda saklanır ve siteyi ziyaret edenler görmez. Canlıya almak için kurulum rehberindeki adımları izleyin.</span> <a href="#" id="resetDemo" data-t="bn2">Örnek veriye dön</a></div>
+
+    <!-- sessions -->
+    <section data-tab="sessions">
+      <div class="head"><div><h2 class="disp" data-t="h1s">Koşular</h2><p data-t="h1p">Sitedeki “Koşu takvimi” bölümünde görünür.</p></div></div>
+      <div id="sessList"></div>
+    </section>
+
+    <!-- updates -->
+    <section data-tab="updates" hidden>
+      <div class="head"><div><h2 class="disp" data-t="h2s">Duyurular</h2><p data-t="h2p">Sitede takvimin altında görünür. En fazla 6 duyuru gösterilir; sabitlenenler önce gelir.</p></div></div>
+      <div id="updList"></div>
+    </section>
+
+    <!-- settings -->
+    <section data-tab="settings" hidden>
+      <div class="head"><div><h2 class="disp" data-t="h3s">Ayarlar</h2><p data-t="h3p">Sitedeki “Buluşma noktası”, “Kimler katılabilir” ve iletişim butonları.</p></div></div>
+      <form id="setForm">
+        <div class="row2">
+          <label class="f"><span data-t="lb1">Şehir</span><input name="city" placeholder="ör. Antalya" data-tp="ph36"></label>
+          <label class="f"><span data-t="lb3">Ana buluşma noktası</span><input name="meetingPoint" placeholder="ör. Konyaaltı Sahili, Aquarium önü" data-tp="ph37"></label>
+        </div>
+        <label class="f"><span data-t="lb4">Harita linki <em>(Google Maps → Paylaş → Bağlantıyı kopyala)</em></span><input name="mapUrl" type="url" placeholder="https://maps.app.goo.gl/…"></label>
+        <div class="row2">
+          <label class="f"><span data-t="lb5">WhatsApp numarası <em>(ülke koduyla)</em></span><input name="whatsapp" inputmode="tel" placeholder="+90 5xx xxx xx xx"></label>
+          <label class="f"><span data-t="lb6">Instagram kullanıcı adı</span><input name="instagram" placeholder="athena.runclub"></label>
+        </div>
+        <label class="f"><span data-t="lb7">Kimler katılabilir <em>(boş bırakılırsa varsayılan metin)</em></span><textarea name="whoCanJoin" placeholder="ör. 16 yaş üstü herkes. Sağlık sorunun varsa önce doktoruna danış." data-tp="ph38"></textarea></label>
+        <label class="f"><span data-t="lb8">Yanına ne almalı <em>(her satıra bir madde)</em></span><textarea name="whatToBring" placeholder="Rahat koşu ayakkabısı&#10;Su&#10;Kapşonlu yağmurluk" data-tp="ph39"></textarea></label>
+        <button class="btn btn-gold w100" style="height:56px" data-t="bt20">Ayarları kaydet</button>
+      </form>
+    </section>
+  </main>
+
+  <button class="btn btn-gold fab" id="fab">+ Yeni koşu</button>
+
+  <nav class="tabs">
+    <div class="wrap">
+      <button data-go="sessions" class="on"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span data-t="tb33">Koşular</span></button>
+      <button data-go="updates"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l15-6v14L3 13z"/><path d="M7 12.5V18a2 2 0 0 0 4 0v-4"/></svg><span data-t="tb34">Duyurular</span></button>
+      <button data-go="settings"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg><span data-t="tb35">Ayarlar</span></button>
+    </div>
+  </nav>
+</div>
+
+<!-- SHEET -->
+<div class="sheet-bg" id="sheetBg"></div>
+<div class="sheet" id="sheet" role="dialog" aria-modal="true">
+  <div class="grab"></div>
+  <div class="wrap">
+    <!-- session form -->
+    <form id="sessForm" hidden>
+      <h3 class="disp" id="sessTitle"></h3>
+      <label class="f"><span data-t="lb9">Başlık *</span><input name="title" required maxlength="80" placeholder="ör. Yürü–koş: yeni başlayanlar" data-tp="ph40"></label>
+      <div class="row2">
+        <label class="f"><span data-t="lb11">Tarih *</span><input name="date" type="date" required></label>
+        <label class="f"><span data-t="lb12">Saat *</span><input name="time" type="time" required value="08:00"></label>
+      </div>
+      <div class="row2">
+        <label class="f"><span data-t="lb13">Buluşma yeri</span><input name="place" maxlength="80" placeholder="ör. Sahil, iskele önü" data-tp="ph41"></label>
+        <label class="f"><span data-t="lb2">Şehir</span><input name="city" maxlength="40" placeholder="ör. Antalya" data-tp="ph36"></label>
+      </div>
+      <label class="f"><span data-t="lb14">Harita linki <em>(isteğe bağlı)</em></span><input name="mapUrl" type="url" placeholder="https://maps.app.goo.gl/…"></label>
+      <div class="row2">
+        <label class="f"><span data-t="lb15">Seviye</span><select name="level"><option value="all" data-t="bt28">Her seviye</option><option value="beginner" data-t="bt29">Yeni başlayan</option><option value="intermediate" data-t="bt30">Orta seviye</option></select></label>
+        <label class="f"><span data-t="lb16">Mesafe (km)</span><input name="distance" maxlength="12" placeholder="ör. 5" data-tp="ph42"></label>
+      </div>
+      <label class="f"><span data-t="lb17">Notlar</span><textarea name="notes" maxlength="400" placeholder="ör. İlk kez gelenler için ideal. Sonunda birlikte esneme." data-tp="ph43"></textarea></label>
+      <label class="toggle"><span data-t="bt21">Bu koşu iptal edildi</span><input type="checkbox" name="cancelled"></label>
+      <div class="actions">
+        <button class="btn btn-gold" type="submit" data-t="bt23">Kaydet</button>
+        <button class="btn btn-line" type="button" id="dupBtn" hidden data-t="bt24">Haftaya kopyala</button>
+        <button class="btn btn-red" type="button" id="delSess" hidden data-t="bt25">Sil</button>
+        <button class="btn btn-line" type="button" data-close data-t="bt31">Vazgeç</button>
+      </div>
+    </form>
+    <!-- update form -->
+    <form id="updForm" hidden>
+      <h3 class="disp" id="updTitle"></h3>
+      <label class="f"><span data-t="lb10">Başlık *</span><input name="title" required maxlength="80" placeholder="ör. Cumartesi koşusu sahile taşındı" data-tp="ph44"></label>
+      <label class="f"><span data-t="lb18">Metin *</span><textarea name="text" required maxlength="600" placeholder="Kısa ve net bir duyuru yaz…" data-tp="ph45"></textarea></label>
+      <label class="f"><span data-t="lb19">Tarih</span><input name="date" type="date"></label>
+      <label class="toggle"><span data-t="bt22">Sabitle (en üstte göster)</span><input type="checkbox" name="pinned"></label>
+      <div class="actions">
+        <button class="btn btn-gold" type="submit" data-t="bt26">Yayınla</button>
+        <button class="btn btn-red" type="button" id="delUpd" hidden data-t="bt27">Sil</button>
+        <button class="btn btn-line" type="button" data-close data-t="bt32">Vazgeç</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="config.js"></script>
+<script src="arc-data.js"></script>
+<script>
+const $=id=>document.getElementById(id);
+let DATA=null,PIN='',TAB='sessions',EDIT=null;
+const STAT={tr:{"lg1": "Koç Paneli", "lg2": "Koşuları ve duyuruları buradan yönet. Devam etmek için PIN kodunu gir.", "lg3": "Giriş yap", "tp1": "Koç paneli", "bn1": "<b>Demo modu.</b> Değişiklikler yalnızca bu tarayıcıda saklanır ve siteyi ziyaret edenler görmez. Canlıya almak için kurulum rehberindeki adımları izleyin.", "h1s": "Koşular", "h2s": "Duyurular", "h3s": "Ayarlar", "bn2": "Örnek veriye dön", "h1p": "Sitedeki “Koşu takvimi” bölümünde görünür.", "h2p": "Sitede takvimin altında görünür. En fazla 6 duyuru gösterilir; sabitlenenler önce gelir.", "h3p": "Sitedeki “Buluşma noktası”, “Kimler katılabilir” ve iletişim butonları.", "lb1": "Şehir", "lb2": "Şehir", "lb3": "Ana buluşma noktası", "lb4": "Harita linki <em>(Google Maps → Paylaş → Bağlantıyı kopyala)</em>", "lb5": "WhatsApp numarası <em>(ülke koduyla)</em>", "lb6": "Instagram kullanıcı adı", "lb7": "Kimler katılabilir <em>(boş bırakılırsa varsayılan metin)</em>", "lb8": "Yanına ne almalı <em>(her satıra bir madde)</em>", "lb9": "Başlık *", "lb10": "Başlık *", "lb11": "Tarih *", "lb12": "Saat *", "lb13": "Buluşma yeri", "lb14": "Harita linki <em>(isteğe bağlı)</em>", "lb15": "Seviye", "lb16": "Mesafe (km)", "lb17": "Notlar", "lb18": "Metin *", "lb19": "Tarih", "bt20": "Ayarları kaydet", "bt21": "Bu koşu iptal edildi", "bt22": "Sabitle (en üstte göster)", "bt23": "Kaydet", "bt24": "Haftaya kopyala", "bt25": "Sil", "bt26": "Yayınla", "bt27": "Sil", "bt28": "Her seviye", "bt29": "Yeni başlayan", "bt30": "Orta seviye", "bt31": "Vazgeç", "bt32": "Vazgeç", "tb33": "Koşular", "tb34": "Duyurular", "tb35": "Ayarlar", "ph36": "ör. Antalya", "ph37": "ör. Konyaaltı Sahili, Aquarium önü", "ph38": "ör. 16 yaş üstü herkes. Sağlık sorunun varsa önce doktoruna danış.", "ph39": "Rahat koşu ayakkabısı\nSu\nKapşonlu yağmurluk", "ph40": "ör. Yürü–koş: yeni başlayanlar", "ph41": "ör. Sahil, iskele önü", "ph42": "ör. 5", "ph43": "ör. İlk kez gelenler için ideal. Sonunda birlikte esneme.", "ph44": "ör. Cumartesi koşusu sahile taşındı", "ph45": "Kısa ve net bir duyuru yaz…"},en:{"lg1": "Coach Panel", "lg2": "Manage runs and announcements here. Enter your PIN to continue.", "lg3": "Log in", "tp1": "Coach panel", "bn1": "<b>Demo mode.</b> Changes are saved only in this browser and visitors don't see them. Follow the setup guide to go live.", "h1s": "Runs", "h2s": "Announcements", "h3s": "Settings", "bn2": "Back to sample data", "h1p": "Shown in the “Run schedule” section of the site.", "h2p": "Shown below the schedule. Up to 6 are displayed; pinned ones come first.", "h3p": "The site's “Where we meet”, “Who can join” and contact buttons.", "lb1": "City", "lb2": "City", "lb3": "Main meeting point", "lb4": "Map link <em>(Google Maps → Share → Copy link)</em>", "lb5": "WhatsApp number <em>(with country code)</em>", "lb6": "Instagram username", "lb7": "Who can join <em>(leave empty for the default text)</em>", "lb8": "What to bring <em>(one item per line)</em>", "lb9": "Title *", "lb10": "Title *", "lb11": "Date *", "lb12": "Time *", "lb13": "Meeting place", "lb14": "Map link <em>(optional)</em>", "lb15": "Level", "lb16": "Distance (km)", "lb17": "Notes", "lb18": "Text *", "lb19": "Date", "bt20": "Save settings", "bt21": "This run is cancelled", "bt22": "Pin (show at the top)", "bt23": "Save", "bt24": "Copy to next week", "bt25": "Delete", "bt26": "Publish", "bt27": "Delete", "bt28": "All levels", "bt29": "Beginner", "bt30": "Intermediate", "bt31": "Cancel", "bt32": "Cancel", "tb33": "Runs", "tb34": "Announcements", "tb35": "Settings", "ph36": "e.g. Antalya", "ph37": "e.g. Konyaaltı Beach, by the Aquarium", "ph38": "e.g. Everyone aged 16+. If you have a health condition, talk to your doctor first.", "ph39": "Comfortable running shoes\nWater\nRain jacket", "ph40": "e.g. Walk–run: beginners", "ph41": "e.g. Beach, by the pier", "ph42": "e.g. 5", "ph43": "e.g. Ideal for first-timers. Stretching together at the end.", "ph44": "e.g. Saturday run moved to the beach", "ph45": "Write a short, clear announcement…"}};
+const DYN={"tr": {"newRun": "Yeni koşu", "editRun": "Koşuyu düzenle", "newUpd": "Yeni duyuru", "editUpd": "Duyuruyu düzenle", "fabRun": "+ Yeni koşu", "fabUpd": "+ Yeni duyuru", "live": "Canlı", "demo": "Demo", "demoHint": "<b>Demo modu</b>: herhangi bir PIN ile gir ve paneli dene. Değişiklikler sadece bu tarayıcıda saklanır.", "pinBad": "PIN hatalı.", "pinBad2": "PIN hatalı. Tekrar giriş yap.", "noConn": "Bağlanılamadı. İnternet bağlantını ve kurulum adresini kontrol et.", "saveErr": "Kaydedilemedi. İnternet bağlantını kontrol et.", "noRuns": "Henüz yaklaşan koşu yok.<br>Sağ alttaki <b>+ Yeni koşu</b> ile ekle.", "past": "Geçmiş koşular", "cancel": "İptal", "noUpd": "Henüz duyuru yok.<br><b>+ Yeni duyuru</b> ile ilkini paylaş.", "pinned": "Sabit", "copyReady": "Kopya hazır: tarihi kontrol edip kaydet", "runCancelled": "Koşu iptal olarak işaretlendi", "runSaved": "Koşu kaydedildi ✓", "runDel": "Koşu silindi", "updSaved": "Duyuru yayınlandı ✓", "updDel": "Duyuru silindi", "delAgain": "Silmek için tekrar “Sil”e bas", "setSaved": "Ayarlar kaydedildi ✓", "reset": "Örnek veri geri yüklendi", "lv": {"all": "Her seviye", "beginner": "Yeni başlayan", "intermediate": "Orta seviye"}, "loc": "tr-TR"}, "en": {"newRun": "New run", "editRun": "Edit run", "newUpd": "New announcement", "editUpd": "Edit announcement", "fabRun": "+ New run", "fabUpd": "+ New post", "live": "Live", "demo": "Demo", "demoHint": "<b>Demo mode</b>: log in with any PIN and try the panel. Changes are saved only in this browser.", "pinBad": "Wrong PIN.", "pinBad2": "Wrong PIN. Please log in again.", "noConn": "Couldn't connect. Check your internet connection and the setup URL.", "saveErr": "Couldn't save. Check your internet connection.", "noRuns": "No upcoming runs yet.<br>Add one with <b>+ New run</b> at the bottom right.", "past": "Past runs", "cancel": "Cancelled", "noUpd": "No announcements yet.<br>Share the first one with <b>+ New post</b>.", "pinned": "Pinned", "copyReady": "Copy ready: check the date and save", "runCancelled": "Run marked as cancelled", "runSaved": "Run saved ✓", "runDel": "Run deleted", "updSaved": "Announcement published ✓", "updDel": "Announcement deleted", "delAgain": "Tap “Delete” again to confirm", "setSaved": "Settings saved ✓", "reset": "Sample data restored", "lv": {"all": "All levels", "beginner": "Beginner", "intermediate": "Intermediate"}, "loc": "en-GB"}};
+let LG='tr';try{LG=localStorage.getItem('arc-admin-lang')||localStorage.getItem('arc-lang')||'tr'}catch(_){}
+const t=k=>DYN[LG][k];
+function applyLang(){document.documentElement.lang=LG;const d=STAT[LG];
+  document.querySelectorAll('[data-t]').forEach(el=>{const v=d[el.dataset.t];if(v!=null)el.innerHTML=v});
+  document.querySelectorAll('[data-tp]').forEach(el=>{const v=d[el.dataset.tp];if(v!=null)el.placeholder=v});
+  document.querySelectorAll('.lang button').forEach(b=>b.classList.toggle('on',b.dataset.lang===LG));
+  if(ARC.mode==='demo')$('loginHint').innerHTML=t('demoHint');
+  $('modeBadge').textContent=t(ARC.mode==='live'?'live':'demo');
+  $('fab').textContent=TAB==='updates'?t('fabUpd'):t('fabRun');
+  $('sessTitle').textContent=EDIT&&$('sessForm').hidden===false?t('editRun'):t('newRun');
+  $('updTitle').textContent=EDIT&&$('updForm').hidden===false?t('editUpd'):t('newUpd');
+  render()}
+document.querySelectorAll('.lang button').forEach(b=>b.onclick=()=>{LG=b.dataset.lang;try{localStorage.setItem('arc-admin-lang',LG)}catch(_){};applyLang()});
+
+const LV=new Proxy({},{get:(o,k)=>t('lv')[k]});
+const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const fmt=(d,o)=>new Date(d+'T12:00:00').toLocaleDateString(t('loc'),o);
+
+function toast(msg,err){const t=$('toast');t.textContent=msg;t.classList.toggle('err',!!err);t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),2600)}
+async function api(body,btn){
+  const old=btn&&btn.innerHTML;if(btn){btn.disabled=true;btn.innerHTML='<span class="spin"></span>'}
+  try{DATA=await ARC.call({...body,pin:PIN});render();return true}
+  catch(e){toast(e.message==='pin'?t('pinBad2'):t('saveErr'),true);if(e.message==='pin')logout();return false}
+  finally{if(btn){btn.disabled=false;btn.innerHTML=old}}
+}
+
+/* ---------- login ---------- */
+
+$('loginForm').addEventListener('submit',async e=>{e.preventDefault();PIN=$('pin').value.trim();$('loginErr').textContent='';
+  const b=$('loginBtn');b.disabled=true;b.innerHTML='<span class="spin"></span>';
+  try{DATA=await ARC.call({op:'ping',pin:PIN});try{sessionStorage.setItem('arc-pin',PIN)}catch(_){};enter()}
+  catch(err){$('loginErr').textContent=err.message==='pin'?t('pinBad'):t('noConn')}
+  finally{b.disabled=false;b.textContent=STAT[LG].lg3}});
+function enter(){$('login').hidden=true;$('app').hidden=false;applyLang();$('modeBadge').textContent=t(ARC.mode==='live'?'live':'demo');$('modeBadge').classList.toggle('live',ARC.mode==='live');$('demoBanner').hidden=ARC.mode==='live';render()}
+function logout(){PIN='';try{sessionStorage.removeItem('arc-pin')}catch(_){};$('app').hidden=true;$('login').hidden=false;$('pin').value=''}
+$('logout').onclick=logout;
+(async()=>{let p='';try{p=sessionStorage.getItem('arc-pin')||''}catch(_){};if(p){PIN=p;try{DATA=await ARC.call({op:'ping',pin:PIN});enter()}catch(_){logout()}}})();
+
+/* ---------- tabs ---------- */
+document.querySelectorAll('.tabs button').forEach(b=>b.onclick=()=>{TAB=b.dataset.go;document.querySelectorAll('.tabs button').forEach(x=>x.classList.toggle('on',x===b));document.querySelectorAll('main section').forEach(s=>s.hidden=s.dataset.tab!==TAB);$('fab').hidden=TAB==='settings';$('fab').textContent=TAB==='updates'?t('fabUpd'):t('fabRun');window.scrollTo({top:0,behavior:'smooth'})});
+
+/* ---------- render ---------- */
+const chev='<span class="chev"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l6 6-6 6"/></svg></span>';
+function sessItem(s,past){return `<div class="item${past?' past':''}${s.cancelled?' cancel':''}" data-id="${esc(s.id)}"><div class="d"><b>${fmt(s.date,{day:'numeric'})}</b><span>${fmt(s.date,{month:'short'})}</span></div><div><h4>${esc(s.title)}</h4><div class="meta">${fmt(s.date,{weekday:'long'})} · ${esc(s.time)}${s.place?' · '+esc(s.place):''}</div><div style="margin-top:6px">${s.cancelled?`<span class="tag red">${t('cancel')}</span>`:''}<span class="tag">${LV[s.level]||LV.all}</span>${s.distance?`<span class="tag gold">${esc(s.distance)} km</span>`:''}</div></div>${chev}</div>`}
+function render(){
+  if(!DATA)return;const today=ARC.today();
+  const ss=[...DATA.sessions].sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time));
+  const up=ss.filter(s=>s.date>=today),past=ss.filter(s=>s.date<today).reverse();
+  $('sessList').innerHTML=(up.length?up.map(s=>sessItem(s)).join(''):`<div class="empty">${t('noRuns')}</div>`)+(past.length?`<details class="past"><summary>${t('past')} (${past.length})</summary>${past.slice(0,30).map(s=>sessItem(s,true)).join('')}</details>`:'');
+  const us=[...DATA.updates].sort((a,b)=>(b.pinned-a.pinned)||String(b.date).localeCompare(a.date));
+  $('updList').innerHTML=us.length?us.map(u=>`<div class="item" data-uid="${esc(u.id)}" style="grid-template-columns:minmax(0,1fr) auto"><div><h4>${esc(u.title)}</h4><div class="meta">${u.date?fmt(u.date,{day:'numeric',month:'long',year:'numeric'}):''}</div><div class="meta" style="color:var(--ink);opacity:.75;margin-top:6px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${esc(u.text)}</div>${u.pinned?`<div style="margin-top:6px"><span class="tag gold">${t('pinned')}</span></div>`:''}</div>${chev}</div>`).join(''):`<div class="empty">${t('noUpd')}</div>`;
+  const f=$('setForm');['city','meetingPoint','mapUrl','whatsapp','instagram','whoCanJoin','whatToBring'].forEach(k=>{if(document.activeElement!==f[k])f[k].value=DATA.settings[k]||''});
+  document.querySelectorAll('[data-id]').forEach(el=>el.onclick=()=>openSess(DATA.sessions.find(s=>s.id===el.dataset.id)));
+  document.querySelectorAll('[data-uid]').forEach(el=>el.onclick=()=>openUpd(DATA.updates.find(u=>u.id===el.dataset.uid)));
+}
+
+/* ---------- sheet ---------- */
+function openSheet(form){$('sessForm').hidden=form!=='sess';$('updForm').hidden=form!=='upd';document.body.classList.add('open');setTimeout(()=>{const i=document.querySelector(form==='sess'?'#sessForm [name=title]':'#updForm [name=title]');if(i&&!EDIT)i.focus()},350)}
+function closeSheet(){document.body.classList.remove('open');EDIT=null}
+$('sheetBg').onclick=closeSheet;document.querySelectorAll('[data-close]').forEach(b=>b.onclick=closeSheet);
+addEventListener('keydown',e=>{if(e.key==='Escape')closeSheet()});
+$('fab').onclick=()=>TAB==='updates'?openUpd(null):openSess(null);
+
+function openSess(s,copy){
+  const f=$('sessForm');f.reset();EDIT=s&&!copy?s:null;
+  $('sessTitle').textContent=EDIT?t('editRun'):t('newRun');
+  const st=DATA.settings||{};
+  const v=s||{date:ARC.today(),time:'08:00',level:'all',place:st.meetingPoint||'',city:st.city||'',mapUrl:st.mapUrl||''};
+  ['title','date','time','place','city','mapUrl','level','distance','notes'].forEach(k=>{if(f[k])f[k].value=v[k]||(k==='level'?'all':'')});
+  f.cancelled.checked=!!(v.cancelled&&!copy);
+  $('delSess').hidden=!EDIT;$('dupBtn').hidden=!EDIT;openSheet('sess');
+}
+$('dupBtn').onclick=()=>{const s={...EDIT};const d=new Date(s.date+'T12:00:00');d.setDate(d.getDate()+7);s.date=d.toISOString().slice(0,10);s.id='';openSess(s,true);toast(t('copyReady'))};
+$('sessForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;
+  const item={id:EDIT?EDIT.id:ARC.uid(),title:f.title.value.trim(),date:f.date.value,time:f.time.value,place:f.place.value.trim(),city:f.city.value.trim(),mapUrl:f.mapUrl.value.trim(),level:f.level.value,distance:f.distance.value.trim(),notes:f.notes.value.trim(),cancelled:f.cancelled.checked};
+  if(await api({op:'save',type:'sessions',item},f.querySelector('[type=submit]'))){closeSheet();toast(item.cancelled?t('runCancelled'):t('runSaved'))}});
+$('delSess').onclick=async()=>{if(!EDIT)return;if(!confirmDel())return;if(await api({op:'delete',type:'sessions',id:EDIT.id},$('delSess'))){closeSheet();toast(t('runDel'))}};
+
+function openUpd(u){const f=$('updForm');f.reset();EDIT=u||null;$('updTitle').textContent=EDIT?t('editUpd'):t('newUpd');
+  f.title.value=u?u.title:'';f.text.value=u?u.text:'';f.date.value=u&&u.date?u.date:ARC.today();f.pinned.checked=!!(u&&u.pinned);$('delUpd').hidden=!EDIT;openSheet('upd')}
+$('updForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;
+  const item={id:EDIT?EDIT.id:ARC.uid(),title:f.title.value.trim(),text:f.text.value.trim(),date:f.date.value||ARC.today(),pinned:f.pinned.checked};
+  if(await api({op:'save',type:'updates',item},f.querySelector('[type=submit]'))){closeSheet();toast(t('updSaved'))}});
+$('delUpd').onclick=async()=>{if(!EDIT)return;if(!confirmDel())return;if(await api({op:'delete',type:'updates',id:EDIT.id},$('delUpd'))){closeSheet();toast(t('updDel'))}};
+
+/* two-tap delete instead of a browser dialog */
+let delArm=0;function confirmDel(){const now=Date.now();if(now-delArm<3000){delArm=0;return true}delArm=now;toast(t('delAgain'),true);return false}
+
+$('setForm').addEventListener('submit',async e=>{e.preventDefault();const f=e.target;const item={};['city','meetingPoint','mapUrl','whatsapp','instagram','whoCanJoin','whatToBring'].forEach(k=>item[k]=f[k].value.trim());item.instagram=item.instagram.replace(/^@/,'');
+  if(await api({op:'save',type:'settings',item},f.querySelector('button')))toast(t('setSaved'))});
+applyLang();
+$('resetDemo').onclick=async e=>{e.preventDefault();DATA=await ARC.call({op:'reset'});render();toast(t('reset'))};
+</script>
+</body>
+</html>

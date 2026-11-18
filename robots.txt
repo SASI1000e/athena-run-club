@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /athena-run-club/admin.html
+
+Sitemap: https://sasi1000e.github.io/athena-run-club/sitemap.xml
