@@ -34,6 +34,7 @@
     d = d || {};
     d.settings = d.settings || {};
     d.sessions = (d.sessions || []).map(s => ({ ...s, cancelled: s.cancelled === true || s.cancelled === "TRUE" || s.cancelled === "true" }));
+    d.stories = (d.stories || []).filter(x => x && x.url);
     d.updates = (d.updates || []).map(u => ({ ...u, pinned: u.pinned === true || u.pinned === "TRUE" || u.pinned === "true" }));
     d.sessions.forEach(s => { if (s.date instanceof Date) s.date = iso(s.date); s.date = String(s.date || "").slice(0, 10); s.time = String(s.time || "").slice(0, 5); });
     d.updates.forEach(u => { u.date = String(u.date || "").slice(0, 10); });

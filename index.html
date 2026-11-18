@@ -583,6 +583,36 @@ footer{position:relative;margin-top:140px;padding-top:30px;border-top:1px solid 
   .qa summary{font-size:16px;padding:18px 20px}
 }
 [hidden]{display:none!important}
+
+/* ===== instagram stories ===== */
+.story-btn{display:inline-flex;align-items:center;gap:12px;cursor:pointer;background:none;border:0;color:inherit;text-align:left}
+.story-btn .ring{position:relative;width:62px;height:62px;border-radius:50%;padding:3px;background:conic-gradient(from 210deg,#feda75,#fa7e1e,#d62976,#962fbf,#4f5bd5,#feda75);animation:ringspin 4s linear infinite;flex:none}
+.story-btn .ring i{display:block;width:100%;height:100%;border-radius:50%;border:3px solid var(--ink);background:var(--ivory) center/108% no-repeat;overflow:hidden}
+.story-btn .ring::after{content:"";position:absolute;inset:-6px;border-radius:50%;border:2px solid rgba(250,126,30,.5);animation:ringpulse 1.8s ease-out infinite}
+@keyframes ringspin{to{filter:hue-rotate(360deg)}}
+@keyframes ringpulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.25);opacity:0}}
+.story-btn b{display:block;font-family:var(--disp);font-stretch:110%;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
+.story-btn small{display:block;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--gold-l)}
+.hero-story{position:absolute;z-index:4;right:max(5vw,calc((100vw - 1280px)/2));top:118px;color:#fff;padding:10px 18px 10px 10px;border-radius:99px;background:rgba(5,15,31,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--hairL)}
+.insta-head .story-btn{color:var(--navy)}.insta-head .story-btn small{color:var(--gold-d)}
+.insta-head .story-btn .ring i{border-color:var(--ivory)}
+.sv{position:fixed;inset:0;z-index:300;background:rgba(3,8,18,.94);display:grid;place-items:center;opacity:0;pointer-events:none;transition:opacity .35s}
+.sv.open{opacity:1;pointer-events:auto}
+.sv-box{position:relative;height:min(92vh,860px);aspect-ratio:9/16;max-width:100vw;border-radius:22px;overflow:hidden;background:#000;transform:scale(.94);transition:transform .45s var(--ease)}
+.sv.open .sv-box{transform:none}
+.sv-media{position:absolute;inset:0;display:grid;place-items:center}
+.sv-media img,.sv-media video{width:100%;height:100%;object-fit:cover}
+.sv-bars{position:absolute;top:12px;left:12px;right:12px;z-index:3;display:flex;gap:4px}
+.sv-bars span{flex:1;height:3px;border-radius:3px;background:rgba(255,255,255,.35);overflow:hidden}
+.sv-bars span i{display:block;height:100%;width:0;background:#fff}
+.sv-top{position:absolute;top:24px;left:14px;right:14px;z-index:3;display:flex;align-items:center;gap:10px;color:#fff;font-size:13.5px;font-weight:600;text-shadow:0 1px 6px rgba(0,0,0,.5)}
+.sv-top .av{width:34px;height:34px;border-radius:50%;background:var(--ivory) center/110% no-repeat;border:2px solid #fff}
+.sv-top time{font-weight:400;opacity:.8}
+.sv-x{margin-left:auto;width:38px;height:38px;border-radius:50%;background:rgba(0,0,0,.3);color:#fff;font-size:22px;line-height:1;border:0;cursor:pointer}
+.sv-nav{position:absolute;top:70px;bottom:80px;width:40%;z-index:2;border:0;background:none;cursor:pointer}
+.sv-nav.prev{left:0}.sv-nav.next{right:0}
+.sv-cta{position:absolute;left:50%;bottom:22px;transform:translateX(-50%);z-index:3;white-space:nowrap;padding:12px 20px;border-radius:99px;background:rgba(255,255,255,.92);color:var(--ink);font-size:13px;font-weight:600}
+@media (max-width:640px){.hero-story{top:92px;right:4vw;padding:6px 14px 6px 6px}.hero-story .ring{width:48px;height:48px}.sv-box{height:100svh;border-radius:0}}
 /* anim initial states (only with JS animation lib) */
 html.anim .rv{opacity:0;transform:translateY(60px)}
 html.anim .clip{clip-path:inset(100% 0 0 0)}
@@ -718,6 +748,7 @@ html.no-anim .w{opacity:1}
     </div>
   </div>
   <div class="chip c3 fade" data-par="12"><span class="bm"><img src="img/mark.png" alt=""></span><div><small data-i="c3">Founder &amp; Coach</small><b>ESRA KAYA</b></div></div>
+  <button type="button" class="story-btn hero-story" data-story hidden><span class="ring"><i style="background-image:url(img/mark.png)"></i></span><span><b data-i="st1">New story</b><small>@athena.runclub</small></span></button>
   <div class="scroll-cue"><div class="cue-run"><span class="ground"></span><span class="rn" data-d=".62s"></span></div><span data-i="sc">Scroll to start</span></div>
 </header>
 
@@ -984,7 +1015,7 @@ html.no-anim .w{opacity:1}
         <span class="idx rv" data-i="ig0"><b>08</b> On Instagram</span>
         <h2 class="disp rv" style="color:var(--navy)">@athena<span class="serif gold">.runclub</span></h2>
       </div>
-      <a class="btn btn-ink rv" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><span data-i="ig1">Follow the club</span></a>
+      <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><button type="button" class="story-btn" data-story hidden><span class="ring"><i style="background-image:url(img/mark.png)"></i></span><span><b data-i="st1">New story</b><small>@athena.runclub</small></span></button><a class="btn btn-ink rv" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><span data-i="ig1">Follow the club</span></a></div>
     </div>
     <div class="igrid" id="igrid"></div>
   </div>
@@ -1030,10 +1061,19 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
+<div class="sv" id="sv" role="dialog" aria-modal="true" aria-label="Instagram stories">
+  <div class="sv-box">
+    <div class="sv-bars" id="svBars"></div>
+    <div class="sv-top"><span class="av" style="background-image:url(img/mark.png)"></span><span>athena.runclub</span><time id="svTime"></time><button class="sv-x" id="svX" aria-label="Close">×</button></div>
+    <div class="sv-media" id="svMedia"></div>
+    <button class="sv-nav prev" id="svPrev" aria-label="Previous"></button><button class="sv-nav next" id="svNext" aria-label="Next"></button>
+    <a class="sv-cta" id="svCta" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><span data-i="st2">Open on Instagram</span> ↗</a>
+  </div>
+</div>
 <div class="mbar" id="mbar"><a class="btn btn-gold" href="#join" data-go><span class="track-mini"><span class="rn btn-run" data-d=".55s" data-c="#050f1f" data-thick="1" aria-hidden="true"></span><span class="rn btn-run" data-d=".6s" data-c="#16407a" data-nopony="1" data-thick="1" aria-hidden="true"></span><span class="rn btn-run" data-d=".52s" data-c="#0c2a52" data-thick="1" aria-hidden="true"></span><span class="rn btn-run" data-d=".64s" data-c="#3d5f92" data-nopony="1" data-thick="1" aria-hidden="true"></span></span><span data-i="n6">Join the club</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 
-<script src="config.js?v=4"></script>
-<script src="arc-data.js?v=4"></script>
+<script src="config.js?v=5"></script>
+<script src="arc-data.js?v=5"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -1088,7 +1128,7 @@ p6:"Birlikte koş",p7:"Teknik, nefes ve tempo üzerine yakın koçluk eşliğind
 p8:"Yaşam tarzın olsun",p9:"Her başarıyı kutlar, adım adım ilerler ve sporu hayatının kalıcı bir parçası yaparız.",
 f0:"<b>07</b> Sana göre mi?",f1:"Bu tam sana<br>göre, <span class=\"serif gold\">eğer…</span>",
 f2:"Hep koşmaya başlamak istedin ama nereden başlayacağını bilemedin",f3:"Daha önce denedin, çabuk yoruldun ve iki hafta sonra bıraktın",f4:"Düzenli kalmak için bir yapıya ve bir gruba ihtiyacın var",f5:"Sakatlanmadan ve baskı hissetmeden güvenle ilerlemek istiyorsun",f6:"Hem bedenen hem zihnen daha güçlü hissetmek istiyorsun",
-sc:"Başlamak için kaydır",cw1:"Her tempo<br><span class=\"serif gold\">kabulümüzdür.</span>",cw2:"Yürüyenler, hafif koşanlar, koşucular. İlk kez başlayanlar ve geri dönenler. Athena Run Club'ta herkes kendi temposunda ilerler ve herkes buraya ait.",cl_a:"1. kulvar · yürüyüş",cl_b:"2. kulvar · hafif koşu",cl_c:"3. kulvar · koşu",tg1:"Yürüyüş",tg2:"Hafif koşu",tg3:"Koç Esra",sk:"km · grup koşusu",sh:"hızlanmak için kaydır ↓",n7:"Takvim",n8:"SSS",sc0:"<b>02</b> Koşu takvimi",sc1:"Sıradaki koşular.<br><span class=\"serif gold\">Olduğun gibi gel.</span>",sc2:"Bir koşu seç, “Katılıyorum”a bas ve bize mesaj at. Tüm seanslar ücretsiz ve her seviyeye açık. Değişiklikler, iptaller ve yaklaşan etkinlikler her zaman önce burada görünür.",sc3:"Takvim yükleniyor…",sc4:"Örnek seanslar: gerçek koşuları koç yönetim panelinden ekler.",in1:"Buluşma noktası",in2:"Buluşma noktası takvimde her koşunun yanında yazıyor.",in3:"Haritada aç",in4:"Yanına ne almalı",in5:"<li>Rahat koşu ayakkabısı</li><li>Havaya uygun kıyafet</li><li>Bir şişe su</li><li>İyi bir ruh hali, başka bir şey değil</li>",in6:"Kimler katılabilir",in7:"Yeni başlayanlar, koşuya geri dönenler ve aradaki herkes. Bir sağlık sorunun ya da yakın zamanda bir sakatlığın varsa, önce doktoruna danış ve koça haber ver.",in8:"Instagram'dan yaz",up0:"Yaklaşan etkinlikler",ig0:"<b>08</b> Instagram'da",ig1:"Kulübü takip et",fq0:"<b>09</b> Sorular",fq1:"Bilmekte<br><span class=\"serif gold\">fayda var.</span>",fq2:"Hâlâ emin değil misin? Koç Esra'ya yaz, saçma soru yoktur.",q1q:"Gerçekten ücretsiz mi?",q1a:"Evet. Aidat yok, abonelik yok, gizli ücret yok. Koç Esra'nın tek hedefi herkesin hareket etmesine ve daha sağlıklı yaşamasına yardım etmek.",q2q:"Hiç koşmadım. Katılabilir miyim?",q2a:"Kesinlikle. Yeni başlayan seansları yürü–koş yöntemiyle, tamamen sıfırdan başlayanlar için planlanır.",q3q:"Yavaşım. Grubu yavaşlatır mıyım?",q3a:"Hayır. Herkes kendi temposunda koşar ve kimse geride bırakılmaz. Kulübün amacı tam olarak bu.",q4q:"Yanıma ne almalıyım?",q4a:"Rahat koşu ayakkabısı, havaya uygun kıyafet, su ve iyi bir ruh hali.",q5q:"Bir koşuya nasıl kaydolurum?",q5a:"Takvimden bir koşu seç, “Katılıyorum”a bas ve bize mesaj at. Ya da Instagram'da @athena.runclub'a yaz.",q6q:"Sağlık durumum ne olacak?",q6a:"Kronik bir rahatsızlığın, yakın zamanda bir sakatlığın varsa ya da hamileysen, başlamadan önce doktoruna danış ve koça haber ver.",q7q:"Hava kötüyse ne olur?",q7a:"Her değişiklik ya da iptal bu sayfadaki takvimde, “Yaklaşan etkinlikler” bölümünde ve Instagram'da paylaşılır.",j0:"Kulübe katıl · ücretsiz",igt:"Katıl ve koça yaz",j1:"İlk koşun<br><span class=\"serif gold\">burada başlıyor.</span>",
+sc:"Başlamak için kaydır",cw1:"Her tempo<br><span class=\"serif gold\">kabulümüzdür.</span>",cw2:"Yürüyenler, hafif koşanlar, koşucular. İlk kez başlayanlar ve geri dönenler. Athena Run Club'ta herkes kendi temposunda ilerler ve herkes buraya ait.",cl_a:"1. kulvar · yürüyüş",cl_b:"2. kulvar · hafif koşu",cl_c:"3. kulvar · koşu",tg1:"Yürüyüş",tg2:"Hafif koşu",tg3:"Koç Esra",sk:"km · grup koşusu",sh:"hızlanmak için kaydır ↓",n7:"Takvim",n8:"SSS",sc0:"<b>02</b> Koşu takvimi",sc1:"Sıradaki koşular.<br><span class=\"serif gold\">Olduğun gibi gel.</span>",sc2:"Bir koşu seç, “Katılıyorum”a bas ve bize mesaj at. Tüm seanslar ücretsiz ve her seviyeye açık. Değişiklikler, iptaller ve yaklaşan etkinlikler her zaman önce burada görünür.",sc3:"Takvim yükleniyor…",sc4:"Örnek seanslar: gerçek koşuları koç yönetim panelinden ekler.",in1:"Buluşma noktası",in2:"Buluşma noktası takvimde her koşunun yanında yazıyor.",in3:"Haritada aç",in4:"Yanına ne almalı",in5:"<li>Rahat koşu ayakkabısı</li><li>Havaya uygun kıyafet</li><li>Bir şişe su</li><li>İyi bir ruh hali, başka bir şey değil</li>",in6:"Kimler katılabilir",in7:"Yeni başlayanlar, koşuya geri dönenler ve aradaki herkes. Bir sağlık sorunun ya da yakın zamanda bir sakatlığın varsa, önce doktoruna danış ve koça haber ver.",in8:"Instagram'dan yaz",up0:"Yaklaşan etkinlikler",ig0:"<b>08</b> Instagram'da",ig1:"Kulübü takip et",fq0:"<b>09</b> Sorular",fq1:"Bilmekte<br><span class=\"serif gold\">fayda var.</span>",fq2:"Hâlâ emin değil misin? Koç Esra'ya yaz, saçma soru yoktur.",q1q:"Gerçekten ücretsiz mi?",q1a:"Evet. Aidat yok, abonelik yok, gizli ücret yok. Koç Esra'nın tek hedefi herkesin hareket etmesine ve daha sağlıklı yaşamasına yardım etmek.",q2q:"Hiç koşmadım. Katılabilir miyim?",q2a:"Kesinlikle. Yeni başlayan seansları yürü–koş yöntemiyle, tamamen sıfırdan başlayanlar için planlanır.",q3q:"Yavaşım. Grubu yavaşlatır mıyım?",q3a:"Hayır. Herkes kendi temposunda koşar ve kimse geride bırakılmaz. Kulübün amacı tam olarak bu.",q4q:"Yanıma ne almalıyım?",q4a:"Rahat koşu ayakkabısı, havaya uygun kıyafet, su ve iyi bir ruh hali.",q5q:"Bir koşuya nasıl kaydolurum?",q5a:"Takvimden bir koşu seç, “Katılıyorum”a bas ve bize mesaj at. Ya da Instagram'da @athena.runclub'a yaz.",q6q:"Sağlık durumum ne olacak?",q6a:"Kronik bir rahatsızlığın, yakın zamanda bir sakatlığın varsa ya da hamileysen, başlamadan önce doktoruna danış ve koça haber ver.",q7q:"Hava kötüyse ne olur?",q7a:"Her değişiklik ya da iptal bu sayfadaki takvimde, “Yaklaşan etkinlikler” bölümünde ve Instagram'da paylaşılır.",st1:"Yeni hikaye",st2:"Instagram'da aç",j0:"Kulübe katıl · ücretsiz",igt:"Katıl ve koça yaz",j1:"İlk koşun<br><span class=\"serif gold\">burada başlıyor.</span>",
 j2:"Katılım tamamen ücretsiz. Instagram'dan bize mesaj at, nereden başladığını anlat; koçun Esra, güvenli, keyifli ve uzun soluklu koşuya giden yolunu seninle birlikte inşa etsin.",
 ch1:"Bölüm i.",ch2:"Bölüm ii.",ch3:"Bölüm iii.",j3:"Athena Run Club'a katıl",j4:"Koç Esra'ya yaz",ft:"© Athena Run Club · Kurucusu ve koçu Esra Kaya"
 };
@@ -1210,6 +1250,30 @@ if(fine){
   setInterval(()=>{if(!vis)return;b.classList.add('pop');setTimeout(()=>{k=(k+1)%6;bt.textContent=msgs[document.documentElement.lang==='tr'?'tr':'en'][k];b.classList.remove('pop')},350)},2600);
 })();
 
+
+/* ---------- instagram stories ---------- */
+window.ARCStories=function(stories){
+  if(location.hash==='#story-demo')stories=[{url:'img/run-temple.jpg',mediaType:'IMAGE',timestamp:new Date(Date.now()-3600e3).toISOString()},{url:'img/run-happy.jpg',mediaType:'IMAGE',timestamp:new Date(Date.now()-1800e3).toISOString()},{url:'img/gym-5.jpg',mediaType:'IMAGE',timestamp:new Date().toISOString()}];
+  stories=(stories||[]).filter(s=>s.url);if(!stories.length)return;
+  const btns=document.querySelectorAll('[data-story]');btns.forEach(b=>{b.hidden=false;const th=stories[stories.length-1].thumb||stories[stories.length-1].url;if(th&&stories[stories.length-1].mediaType!=='VIDEO')b.querySelector('.ring i').style.backgroundImage=`url("${th}")`,b.querySelector('.ring i').style.backgroundSize='cover'});
+  const sv=document.getElementById('sv'),bars=document.getElementById('svBars'),media=document.getElementById('svMedia'),tm=document.getElementById('svTime');
+  let i=0,timer=null,raf=0,t0=0,dur=5000;
+  bars.innerHTML=stories.map(()=>'<span><i></i></span>').join('');
+  const fill=()=>[...bars.children].forEach((b,k)=>b.firstChild.style.width=k<i?'100%':'0');
+  const ago=ts=>{const m=Math.max(1,Math.round((Date.now()-new Date(ts))/60000));const tr=document.documentElement.lang==='tr';return m<60?(tr?m+' dk':m+'m'):(tr?Math.round(m/60)+' sa':Math.round(m/60)+'h')};
+  function tick(t){const p=Math.min(1,(t-t0)/dur);bars.children[i].firstChild.style.width=(p*100)+'%';if(p>=1)go(1);else raf=requestAnimationFrame(tick)}
+  function show(){cancelAnimationFrame(raf);fill();const s=stories[i];tm.textContent=ago(s.timestamp);
+    if(s.mediaType==='VIDEO'){media.innerHTML=`<video src="${s.url}" playsinline autoplay muted></video>`;const v=media.firstChild;v.onloadedmetadata=()=>{dur=(v.duration||8)*1000;t0=performance.now();raf=requestAnimationFrame(tick)};v.onerror=()=>go(1)}
+    else{media.innerHTML=`<img src="${s.url}" alt="">`;dur=5000;t0=performance.now();raf=requestAnimationFrame(tick)}
+    document.getElementById('svCta').href=s.permalink||'https://www.instagram.com/athena.runclub/'}
+  function go(d){i+=d;if(i<0)i=0;if(i>=stories.length){close();return}show()}
+  function open(){i=0;sv.classList.add('open');document.documentElement.style.overflow='hidden';show()}
+  function close(){cancelAnimationFrame(raf);sv.classList.remove('open');document.documentElement.style.overflow='';media.innerHTML=''}
+  btns.forEach(b=>b.onclick=open);
+  document.getElementById('svX').onclick=close;document.getElementById('svPrev').onclick=()=>go(-1);document.getElementById('svNext').onclick=()=>go(1);
+  sv.addEventListener('click',e=>{if(e.target===sv)close()});
+  addEventListener('keydown',e=>{if(!sv.classList.contains('open'))return;if(e.key==='Escape')close();if(e.key==='ArrowRight')go(1);if(e.key==='ArrowLeft')go(-1)});
+};
 /* ---------- live content: schedule, announcements, instagram ---------- */
 (function(){
   const $=id=>document.getElementById(id);
@@ -1278,7 +1342,7 @@ if(fine){
   }
   function renderAll(){if(!DATA)return;renderSessions();renderInfo();renderUpdates();}
   document.addEventListener('arc-lang',renderAll);
-  ARC.load().then(d=>{DATA=d;renderAll();renderEvents();renderIG();window.ScrollTrigger&&ScrollTrigger.refresh()});
+  ARC.load().then(d=>{DATA=d;renderAll();renderEvents();renderIG();window.ARCStories(d.stories);window.ScrollTrigger&&ScrollTrigger.refresh()});
 })();
 /* ---------- animation layer ---------- */
 const hasG=!!(window.gsap&&window.ScrollTrigger)&&document.documentElement.classList.contains('anim');
