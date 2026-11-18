@@ -552,8 +552,8 @@ footer{position:relative;margin-top:140px;padding-top:30px;border-top:1px solid 
 .ig-post:hover img{transform:scale(1.08)}
 .ig-post .cap{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;background:linear-gradient(transparent 40%,rgba(5,15,31,.85));color:#fff;font-size:12.5px;line-height:1.35;opacity:0;transition:opacity .4s}
 .ig-post:hover .cap{opacity:1}
-.igrid.emb{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;align-items:start}
-.igrid.emb .instagram-media{min-width:0!important;max-width:100%!important;width:100%!important;margin:0!important;border-radius:20px!important;box-shadow:0 20px 50px -30px rgba(5,15,31,.45)!important;border:1px solid rgba(5,15,31,.08)!important}
+.igemb{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;align-items:start;margin-bottom:18px}
+.igemb .instagram-media{min-width:0!important;max-width:100%!important;width:100%!important;margin:0!important;border-radius:20px!important;box-shadow:0 20px 50px -30px rgba(5,15,31,.45)!important;border:1px solid rgba(5,15,31,.08)!important}
 .ig-post .typ{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:rgba(5,15,31,.5);display:grid;place-items:center;color:#fff}
 .ig-post .typ svg{width:14px;height:14px}
 
@@ -595,6 +595,17 @@ footer{position:relative;margin-top:140px;padding-top:30px;border-top:1px solid 
 @keyframes ringpulse{0%{transform:scale(.9);opacity:1}100%{transform:scale(1.25);opacity:0}}
 .story-btn b{display:block;font-family:var(--disp);font-stretch:110%;font-weight:800;font-size:12px;letter-spacing:.16em;text-transform:uppercase}
 .story-btn small{display:block;font-family:var(--serif);font-style:italic;font-size:14px;color:var(--gold-l)}
+@media (min-width:1101px){
+  .hero{height:100svh;min-height:600px}
+  .hero-in{padding:clamp(96px,12.5vh,150px) 0 clamp(84px,11vh,130px)}
+  .hero h1{font-size:clamp(52px,min(8.6vw,13vh),150px);margin:clamp(8px,2vh,28px) 0 clamp(10px,2.4vh,30px)}
+  .hero .free{display:none}
+  .hero-stats div b{font-size:clamp(28px,4.4vh,44px)}
+  .hero-lead{max-width:660px;font-size:clamp(15px,1.12vw,17.5px);line-height:1.6;margin-bottom:clamp(16px,3.2vh,38px)}
+  .hero-stats{margin-top:clamp(16px,3.4vh,48px);padding-top:clamp(10px,1.8vh,22px);max-width:640px}
+  .hero.tight .hero-stats{display:none}
+  .hero-stats div span{white-space:nowrap}
+}
 .hero-story{position:absolute;z-index:4;right:max(5vw,calc((100vw - 1280px)/2));top:118px;color:#fff;padding:10px 18px 10px 10px;border-radius:99px;background:rgba(5,15,31,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--hairL)}
 .insta-head .story-btn{color:var(--navy)}.insta-head .story-btn small{color:var(--gold-d)}
 .insta-head .story-btn .ring i{border-color:var(--ivory)}
@@ -744,9 +755,9 @@ html.no-anim .w{opacity:1}
       <a class="btn btn-line mag" href="#story" data-go><span data-i="h4">Meet your coach</span></a>
     </div>
     <div class="hero-stats fade">
-      <div><b data-count="10.03" data-dec="2">10.03</b><span data-i="hs1">km longest run</span></div>
-      <div><b data-count="24">24</b><span data-i="hs2">logged workouts</span></div>
-      <div><b data-count="2" data-suf="+">2+</b><span data-i="hs3">years of training</span></div>
+      <div><b>0₺</b><span data-i="hs1">to join</span></div>
+      <div><b data-i="hv2">All levels</b><span data-i="hs2">beginners welcome</span></div>
+      <div><b data-i="hv3">Together</b><span data-i="hs3">one team</span></div>
     </div>
   </div>
   <div class="chip c3 fade" data-par="12"><span class="bm"><img src="img/mark.png" alt=""></span><div><small data-i="c3">Founder &amp; Coach</small><b>ESRA KAYA</b></div></div>
@@ -888,9 +899,9 @@ html.no-anim .w{opacity:1}
       <p class="lead rv" data-i="r2">By the sea, between palm trees, through the park and past ancient columns. Every run tracked, every kilometre counted, every finish with a smile.</p>
     </div>
     <div class="kpis">
-      <div class="kpi rv"><b class="gold" data-count="10.03" data-dec="2">10.03</b><span data-i="r3">km, the longest run in the journal</span></div>
-      <div class="kpi rv"><b class="gold" data-count="36">36</b><span data-i="r4">km across five tracked runs</span></div>
-      <div class="kpi rv"><b class="gold" data-count="2065" data-sep="1">2,065</b><span data-i="r5">active kcal burned on those runs</span></div>
+      <div class="kpi rv"><b class="gold">1K</b><span data-i="r3">Week one: walk–run your very first kilometre</span></div>
+      <div class="kpi rv"><b class="gold">5K</b><span data-i="r4">A few weeks later: your first 5K, together with the club</span></div>
+      <div class="kpi rv"><b class="gold">10K</b><span data-i="r5">When you’re ready: the next goal, just like coach Esra</span></div>
     </div>
   </div>
   <div class="rail" id="runRail">
@@ -1019,6 +1030,7 @@ html.no-anim .w{opacity:1}
       </div>
       <div style="display:flex;gap:18px;align-items:center;flex-wrap:wrap"><button type="button" class="story-btn" data-story hidden><span class="ring"><i style="background-image:url(img/mark.png)"></i></span><span><b data-i="st1">New story</b><small>@athena.runclub</small></span></button><a class="btn btn-ink rv" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><span data-i="ig1">Follow the club</span></a></div>
     </div>
+    <div class="igemb" id="igemb" hidden></div>
     <div class="igrid" id="igrid"></div>
   </div>
 </section>
@@ -1091,7 +1103,7 @@ nb:"kurucu ve koç Esra Kaya",n1:"Koç",n2:"Koşular",n3:"İstikrar",n4:"Yöntem
 h0:"Athena Run Club <b>/</b> Kurucusu ve koçu Esra Kaya",
 h1a:"Kimse koşucu",h1b:"olarak doğmaz.",h1c:"Hepimiz sadece başlarız.",
 h2:"Athena Run Club, herkesin başlayabileceği bir koşu topluluğu. Kişisel antrenör Esra Kaya tarafından kurulan ve koçluğu yapılan kulübümüzde, daha önce hiç koşmamış insanların ilk adımı atmasına, gerçek bir özgüven kazanmasına ve hareketi bir yaşam tarzına dönüştürmesine yardım ediyoruz.",
-h3:"Koşmaya başla",h4:"Koçunla tanış",hs1:"km en uzun koşu",hs2:"kayıtlı antrenman",hs3:"yıllık antrenman",
+h3:"Koşmaya başla",h4:"Koçunla tanış",hs1:"katılım ücreti",hv2:"Her seviye",hs2:"yeni başlayana açık",hv3:"Birlikte",hs3:"tek takım",
 c1:"Mesafe",c2:"Aktif",c3:"Kurucu ve Koç",
 tk:"<span>Sıfırdan başla</span><span>özgüvenle koş</span><span>Katılım ücretsiz</span><span>yaşam tarzı olarak spor</span><span>Devam et</span><span>senin tempon, senin yolun</span><i></i>",fr0:"Katılım ücretsiz. Hiçbir ücret yok.",m6:"Katılım %100 ücretsiz",fr1:"Ücretsiz.<span>her zaman.</span>",fr2:"Athena Run Club'a katılmak tamamen ücretsiz. Aidat yok, abonelik yok, gizli bir şart yok. Koç Esra kendine tek bir hedef koydu: <b>herkesin antrenman yapmasına, hareket etmesine ve sağlıklı olmasına yardım etmek</b>. Yanında getirmen gereken tek şey kendin.",fn1:"Katılım ücretsiz",fn2:"Ücret yok, abonelik yok",fn3:"Her seviyeye açık",
 m0:"Manifesto",
@@ -1112,7 +1124,7 @@ s6:"Sonra Athena doğdu",
 s7:"Antik taşlar ve deniz kenarındaki gün batımları arasında bir kulüp fikri doğdu. Adını bilgelik ve güç tanrıçası Athena'dan aldım; çünkü iyi bir koşu ikisine de ihtiyaç duyar: Başlamak için güç, devam etmek için bilgelik.",
 r0:"<b>04</b> Koçun koşu günlüğü",r1:"Koşudan sadece<br>bahsetmiyorum.<br><span class=\"serif gold\">Koşuyorum.</span>",
 r2:"Deniz kenarında, palmiyelerin arasında, parkta ve antik sütunların yanında. Her koşu kayıtlı, her kilometre sayılı, her bitiş bir gülümsemeyle.",
-r3:"km, günlükteki en uzun koşu",r4:"km, kayıtlı beş koşuda",r5:"aktif kcal, bu koşularda yakıldı",
+r3:"İlk hafta: yürü–koş ile ilk kilometren",r4:"Birkaç hafta sonra: kulüple birlikte ilk 5K’n",r5:"Hazır olduğunda: sıradaki hedef, tıpkı koç Esra gibi",
 rc1:"Antik sütunlar arasında 10K",rc2:"26 derece sıcakta park yolu",rc4:"Palmiyelerin arasından, sonra doğruca denize",rc5:"Sahil boyunca",
 rc6a:"Koşudan sonra",rc6:"Sabahı içine çekmek için kumda kısa bir mola",rc7a:"Gri günlerde de",rc7:"Bulutlu havada bile sahil yolunda",rc8a:"Bir koşu daha",rc8:"Bir gün daha, bir koşu daha, bir gülümseme daha",
 r6:"Sürükle ya da kaydır · Veriler Esra'nın Instagram'daki “Run” öne çıkanından",
@@ -1169,7 +1181,11 @@ setLang(start,false);
 /* ---------- fit hero headline ---------- */
 function fitHero(){const h=document.querySelector('.hero h1');h.style.fontSize='';const base=parseFloat(getComputedStyle(h).fontSize);const W=h.clientWidth;let w=0;
   h.querySelectorAll('.li').forEach(l=>{l.style.display='inline-block';w=Math.max(w,l.getBoundingClientRect().width);l.style.display=''});
-  if(w>W)h.style.fontSize=Math.floor(base*W/w*.97)+'px'}
+  if(w>W)h.style.fontSize=Math.floor(base*W/w*.97)+'px';
+  const hero=h.closest('.hero'),inn=hero.querySelector('.hero-in');hero.classList.remove('tight');if(innerWidth<=1100)return;
+  const fit=parseFloat(getComputedStyle(h).fontSize),over=()=>inn.offsetHeight>hero.clientHeight;
+  const shrink=min=>{let fs=fit;h.style.fontSize=fs+'px';while(over()&&fs*.95>=min){fs*=.95;h.style.fontSize=fs+'px'}};
+  shrink(Math.max(56,fit*.6));if(over()){hero.classList.add('tight');shrink(46)}}
 fitHero();document.fonts&&document.fonts.ready.then(fitHero);addEventListener('resize',fitHero);
 
 /* ---------- counters ---------- */
@@ -1340,16 +1356,19 @@ window.ARCStories=function(stories){
     const posts=await ARC.instagram(DATA.instagram);const g=$('igrid');
     const typ={VIDEO:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',CAROUSEL_ALBUM:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg>'};
     if(posts.length){g.innerHTML=posts.slice(0,6).map(p=>`<a class="ig-post" href="${esc(safeUrl(p.permalink)||'https://www.instagram.com/athena.runclub/')}" target="_blank" rel="noopener"><img src="${esc(p.image)}" alt="" loading="lazy">${typ[p.mediaType]?`<span class="typ">${typ[p.mediaType]}</span>`:''}<span class="cap">${esc(String(p.caption||'').slice(0,120))}</span></a>`).join('');return}
-    const links=String((DATA.settings||{}).igPosts||'').split(/\s+/).filter(u=>/^https:\/\/www\.instagram\.com\/(p|reel)\/[\w-]+\/$/.test(u)).slice(0,6);
+    const st=DATA.settings||{},E=$('igemb');
+    const links=String(st.igPosts||'').split(/\s+/).filter(u=>/^https:\/\/www\.instagram\.com\/(p|reel)\/[\w-]+\/$/.test(u)).slice(0,6);
+    const photos=String(st.igPhotos||'').split(/\s+/).filter(u=>/^(img\/[\w.-]+\.(jpe?g|png|webp)|https:\/\/drive\.google\.com\/thumbnail\?id=[\w-]+&sz=w\d+)$/.test(u)).slice(0,6);
+    E.hidden=!links.length;
     if(links.length){
-      g.classList.add('emb');
-      g.innerHTML=links.map(u=>`<blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}?utm_source=ig_embed" data-instgrm-version="14"><a href="${esc(u)}" target="_blank" rel="noopener">Instagram</a></blockquote>`).join('');
+      E.innerHTML=links.map(u=>`<blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}?utm_source=ig_embed" data-instgrm-version="14"><a href="${esc(u)}" target="_blank" rel="noopener">Instagram</a></blockquote>`).join('');
       const run=()=>window.instgrm&&window.instgrm.Embeds.process();
       if(window.instgrm)run();else if(!document.getElementById('ig-embed-js')){const sc=document.createElement('script');sc.id='ig-embed-js';sc.async=true;sc.src='https://www.instagram.com/embed.js';sc.onload=run;document.body.appendChild(sc)}
-      if(window.ResizeObserver&&window.ScrollTrigger){let tm;new ResizeObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>ScrollTrigger.refresh(),300)}).observe(g)}
-      return;
+      if(window.ResizeObserver&&window.ScrollTrigger){let tm;new ResizeObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>ScrollTrigger.refresh(),300)}).observe(E)}
     }
-    g.classList.remove('emb');
+    if(photos.length){g.hidden=false;g.innerHTML=photos.map(u=>`<a class="ig-post" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Athena Run Club" loading="lazy" referrerpolicy="no-referrer" style="object-position:50% 25%"></a>`).join('');return}
+    if(links.length){g.hidden=true;return}
+    g.hidden=false;
     g.innerHTML=fallbackIG.map(f=>`<a class="ig-post" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><img src="img/${f}" alt="" loading="lazy" style="object-position:50% 25%"></a>`).join('');
   }
   function renderAll(){if(!DATA)return;renderSessions();renderInfo();renderUpdates();}
