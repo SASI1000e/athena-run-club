@@ -121,6 +121,7 @@ function doPost(e) {
   const lock = LockService.getScriptLock();
   lock.waitLock(10000);
   try {
+    if (body.op === 'upload') return json({ ok: true, url: saveImage(body.data, body.mime), data: readAll() });
     if (body.op === 'save' && body.type === 'settings') saveSettings(body.item || {});
     else if (body.op === 'save' && TABS[body.type]) upsert(body.type, body.item || {});
     else if (body.op === 'delete' && TABS[body.type]) remove(body.type, body.id);
@@ -129,6 +130,25 @@ function doPost(e) {
   } finally {
     lock.releaseLock();
   }
+}
+
+/* ---------- photo uploads (coach panel → Google Drive) ---------- */
+function photoFolder() {
+  const props = PropertiesService.getScriptProperties();
+  const id = props.getProperty('PHOTO_FOLDER_ID');
+  if (id) { try { return DriveApp.getFolderById(id); } catch (err) {} }
+  const f = DriveApp.createFolder('Athena Run Club – Photos');
+  props.setProperty('PHOTO_FOLDER_ID', f.getId());
+  return f;
+}
+
+function saveImage(b64, mime) {
+  mime = /^image\/(jpeg|png|webp)$/.test(mime || '') ? mime : 'image/jpeg';
+  const bytes = Utilities.base64Decode(String(b64 || ''));
+  if (!bytes.length || bytes.length > 6 * 1024 * 1024) throw new Error('image');
+  const file = photoFolder().createFile(Utilities.newBlob(bytes, mime, 'photo-' + new Date().toISOString().replace(/[:.]/g, '-')));
+  file.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
+  return 'https://drive.google.com/thumbnail?id=' + file.getId() + '&sz=w1080';
 }
 
 /* ---------- helpers ---------- */
