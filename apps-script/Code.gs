@@ -15,6 +15,13 @@
  *     (Instagram professional account + Meta app with "Instagram API with Instagram login").
  *  6. Script properties → add  IG_TOKEN = <the token>
  *  7. Run the function `installTriggers` once: it refreshes the token automatically every week.
+ *
+ * Optional – live Instagram STORIES on the site (official API, Facebook Login path):
+ *  - The club account must be an Instagram Business/Creator account linked to a Facebook Page.
+ *  - Create a Meta app, get a long-lived Page access token with the permissions
+ *    instagram_basic + pages_show_list + pages_read_engagement.
+ *  - Script properties →  FB_PAGE_TOKEN = <page token>   and   IG_USER_ID = <instagram business account id>
+ *  Stories appear on the site automatically while they are live (24 hours).
  */
 
 const TABS = {
@@ -46,6 +53,7 @@ function setup() {
 function doGet() {
   const data = readAll();
   data.instagram = instagramPosts();
+  data.stories = instagramStories();
   return json(Object.assign({ ok: true }, data));
 }
 
@@ -66,6 +74,27 @@ function instagramPosts() {
     });
     cache.put('ig', JSON.stringify(posts), 1800); // 30 minutes
     return posts;
+  } catch (err) { return []; }
+}
+
+function instagramStories() {
+  const props = PropertiesService.getScriptProperties();
+  const token = props.getProperty('FB_PAGE_TOKEN'), igId = props.getProperty('IG_USER_ID');
+  if (!token || !igId) return [];
+  const cache = CacheService.getScriptCache();
+  const hit = cache.get('stories');
+  if (hit) return JSON.parse(hit);
+  try {
+    const url = 'https://graph.facebook.com/v21.0/' + encodeURIComponent(igId) +
+      '/stories?fields=id,media_type,media_url,thumbnail_url,permalink,timestamp&access_token=' + encodeURIComponent(token);
+    const j = JSON.parse(UrlFetchApp.fetch(url, { muteHttpExceptions: true }).getContentText());
+    const stories = (j.data || []).map(function (st) {
+      return { id: st.id, mediaType: st.media_type, url: st.media_url || '', thumb: st.thumbnail_url || st.media_url || '',
+               permalink: st.permalink || '', timestamp: st.timestamp };
+    }).filter(function (st) { return st.url; })
+      .sort(function (a, b) { return String(a.timestamp).localeCompare(String(b.timestamp)); });
+    cache.put('stories', JSON.stringify(stories), 300); // 5 minutes – new stories show up quickly
+    return stories;
   } catch (err) { return []; }
 }
 
