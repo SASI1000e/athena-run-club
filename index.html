@@ -1232,7 +1232,7 @@ if(fine){
     const t=T[L()],box=$('sessions');const today=ARC.today();
     if(DATA.error){box.innerHTML=`<div class="s-empty">${t.err}</div>`;return}
     const list=DATA.sessions.filter(s=>s.date>=today).sort((a,b)=>(a.date+a.time).localeCompare(b.date+b.time)).slice(0,8);
-    if(!list.length){box.innerHTML=`<div class="s-empty">${t.empty}</div>`;return}
+    if(!list.length){box.innerHTML=`<div class="s-empty">${t.empty}</div>`;$('demoNote').hidden=true;return}
     const loc=L()==='tr'?'tr-TR':'en-GB';let firstOpen=true;
     box.innerHTML=list.map(s=>{const d=new Date(s.date+'T12:00:00');const isNext=!s.cancelled&&firstOpen;if(isNext)firstOpen=false;
       const place=[s.place,s.city].filter(Boolean).join(' · ');const map=safeUrl(s.mapUrl);
@@ -1259,7 +1259,7 @@ if(fine){
   }
   function renderUpdates(){
     const t=T[L()],loc=L()==='tr'?'tr-TR':'en-GB';
-    const list=[...DATA.updates].sort((a,b)=>(b.pinned-a.pinned)||String(b.date).localeCompare(a.date)).slice(0,6);
+    const today=ARC.today();const list=DATA.updates.filter(u=>u.pinned||!u.date||u.date>=today).sort((a,b)=>(b.pinned-a.pinned)||String(a.date).localeCompare(b.date)).slice(0,6);
     $('updatesWrap').hidden=!list.length;
     $('updates').innerHTML=list.map(u=>`<article class="u-card${u.pinned?' pin':''}">${u.pinned?`<span class="pill2 gold pinb">${t.pinned}</span>`:''}${DATA.demo?`<span class="pill2 demo" style="margin-right:6px">${t.demo}</span>`:''}<time>${u.date?new Date(u.date+'T12:00:00').toLocaleDateString(loc,{day:'numeric',month:'long',year:'numeric'}):''}</time><h5>${esc(u.title)}</h5><p>${esc(u.text)}</p></article>`).join('');
   }

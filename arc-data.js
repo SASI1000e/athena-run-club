@@ -22,14 +22,8 @@
         whoCanJoin: "",
         whatToBring: ""
       },
-      sessions: [
-        { id: "d1", date: nextDow(2), time: "07:30", title: "Yürü–koş: yeni başlayanlar", place: "Buluşma noktası", city: "", mapUrl: "", level: "beginner", distance: "3", notes: "İlk kez gelenler için ideal. 1 dk koşu, 2 dk yürüyüş.", cancelled: false },
-        { id: "d2", date: nextDow(4), time: "19:00", title: "Sahil koşusu", place: "Buluşma noktası", city: "", mapUrl: "", level: "all", distance: "5", notes: "Herkes kendi temposunda. Sonunda birlikte esneme.", cancelled: false },
-        { id: "d3", date: nextDow(6), time: "08:00", title: "Hafta sonu grup koşusu", place: "Buluşma noktası", city: "", mapUrl: "", level: "all", distance: "5–7", notes: "Koşu sonrası kahve ☕", cancelled: false }
-      ],
-      updates: [
-        { id: "u1", date: iso(new Date()), title: "Yeni dönem başlıyor!", text: "Athena Run Club'a katılım ücretsiz. Hiç koşmadıysan tam zamanı: yeni başlayanlar grubumuz her hafta.", pinned: true }
-      ]
+      sessions: [],
+      updates: []
     };
   }
 
