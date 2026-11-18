@@ -606,6 +606,23 @@ footer{position:relative;margin-top:140px;padding-top:30px;border-top:1px solid 
   .hero.tight .hero-stats{display:none}
   .hero-stats div span{white-space:nowrap}
 }
+@media (min-width:1101px) and (min-height:560px){
+  .screen{min-height:100svh;display:flex;flex-direction:column;justify-content:center;padding-top:clamp(88px,11.5vh,124px)!important;padding-bottom:clamp(28px,5vh,64px)!important}
+  .screen>*{flex:none}
+  .screen .rail{margin-top:clamp(24px,4vh,76px)}
+  .screen.cta{justify-content:center}
+  .screen h2.disp{font-size:clamp(46px,min(7vw,11vh),112px);margin:clamp(10px,1.8vh,22px) 0 clamp(12px,2.4vh,28px)}
+  .screen.cta h2{font-size:clamp(58px,min(10vw,15vh),170px)}
+  .club-grid{gap:clamp(40px,5vw,90px)}
+  .club-logo{max-height:calc(100svh - 190px);aspect-ratio:1;margin-inline:auto;width:100%;max-width:calc(100svh - 190px)}
+  .sched-head{margin-bottom:clamp(20px,4vh,60px)}
+  .sched-grid .icard{padding:clamp(14px,2vh,24px) 22px}
+  .icard .ic{margin-bottom:8px}
+  .scene{height:clamp(220px,36vh,380px);margin-top:clamp(20px,4vh,70px)}
+  .runs-top{gap:40px}
+  .screen .run-card{width:clamp(210px,30vh,300px)}
+  .screen .rail-ui{margin-top:14px}
+}
 .hero-story{position:absolute;z-index:4;right:max(5vw,calc((100vw - 1280px)/2));top:118px;color:#fff;padding:10px 18px 10px 10px;border-radius:99px;background:rgba(5,15,31,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--hairL)}
 .insta-head .story-btn{color:var(--navy)}.insta-head .story-btn small{color:var(--gold-d)}
 .insta-head .story-btn .ring i{border-color:var(--ivory)}
@@ -739,7 +756,7 @@ html.no-anim .w{opacity:1}
 </div>
 
 <header class="hero" id="top">
-  <div class="hero-bg" id="heroBg"><img src="img/jump.jpg" alt="A woman jumping with joy against a sunset sky" id="heroImg"></div>
+  <div class="hero-bg" id="heroBg"><img src="img/jump.jpg" alt="A woman jumping with joy against a sunset sky" id="heroImg" fetchpriority="high" decoding="async"></div>
   <svg class="sun" viewBox="0 0 200 200" aria-hidden="true"><g stroke="#e3a74f" fill="none"><circle cx="100" cy="100" r="52" stroke-width=".8"/><g stroke-width="1.6" class="sunr"><path d="M100 18v22"/><path d="M100 18v22" transform="rotate(30 100 100)"/><path d="M100 18v22" transform="rotate(60 100 100)"/><path d="M100 18v22" transform="rotate(90 100 100)"/><path d="M100 18v22" transform="rotate(120 100 100)"/><path d="M100 18v22" transform="rotate(150 100 100)"/><path d="M100 18v22" transform="rotate(180 100 100)"/><path d="M100 18v22" transform="rotate(210 100 100)"/><path d="M100 18v22" transform="rotate(240 100 100)"/><path d="M100 18v22" transform="rotate(270 100 100)"/><path d="M100 18v22" transform="rotate(300 100 100)"/><path d="M100 18v22" transform="rotate(330 100 100)"/></g></g></svg>
   <div class="wrap hero-in">
     <span class="idx fade" data-i="h0">Athena Run Club <b>/</b> Kurucusu ve koçu Esra Kaya</span>
@@ -789,7 +806,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="manifesto">
+<section class="screen manifesto">
   <div class="wrap">
     <span class="idx rv" data-i="m0">The Manifesto</span>
     <p class="big" id="manifesto" data-i="m1">No experience needed. No perfect body. <em>No pace is too slow.</em> All you need is the decision to start. The rest we build together, one step at a time.</p>
@@ -803,7 +820,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="club" id="club">
+<section class="screen club" id="club">
   <div class="wrap club-grid">
     <div class="club-logo clip"><span class="ring"></span><span class="ring r2"></span><img src="img/logo-full.png" alt="Athena Run Club logo"></div>
     <div>
@@ -820,7 +837,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="sched" id="schedule">
+<section class="screen sched" id="schedule">
   <div class="wrap">
     <div class="sched-head">
       <div>
@@ -890,7 +907,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="runs dark" id="runs">
+<section class="screen runs dark" id="runs">
   <div class="wrap runs-top">
     <div>
       <span class="idx rv" data-i="r0"><b>04</b> The coach's run journal</span>
@@ -956,7 +973,7 @@ html.no-anim .w{opacity:1}
 
 
 
-<section class="method" id="method">
+<section class="screen method" id="method">
   <div class="wrap">
     <span class="idx rv" data-i="p0"><b>06</b> The Athena method</span>
     <h2 class="disp rv" style="color:var(--navy)" data-i="p1">From zero to running.<br><span class="serif gold">And beyond.</span></h2>
@@ -990,7 +1007,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="foryou dark">
+<section class="screen foryou dark" id="foryou">
   <div class="wrap fy-grid">
     <div>
       <span class="idx rv" data-i="f0"><b>07</b> Is it for you?</span>
@@ -1020,7 +1037,7 @@ html.no-anim .w{opacity:1}
   </div>
 </div>
 
-<section class="insta" id="instagram">
+<section class="screen insta" id="instagram">
   <div class="wrap">
     <div class="insta-head">
       <div>
@@ -1034,7 +1051,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="faq" id="faq">
+<section class="screen faq" id="faq">
   <div class="wrap faq-grid">
     <div>
       <span class="idx rv" data-i="fq0"><b>09</b> Questions</span>
@@ -1053,7 +1070,7 @@ html.no-anim .w{opacity:1}
   </div>
 </section>
 
-<section class="cta dark" id="join">
+<section class="screen cta dark" id="join">
   <svg class="sunbig" viewBox="0 0 200 120" aria-hidden="true"><g stroke="#e3a74f" fill="none" stroke-width=".6"><path d="M30 120a70 70 0 0 1 140 0"/><path d="M100 10v20M54 24l10 17M146 24l-10 17M22 58l17 10M178 58l-17 10"/></g></svg>
   <div class="wrap">
     <div class="cta-crew rv"><span class="rn" data-d=".7s" data-c="#9db6da" data-nopony="1" style="width:80px;height:104px"></span><span class="rn" data-d=".6s" data-c="#e3a74f" style="width:104px;height:136px"></span><span class="rn" data-d=".75s" data-c="#f5efe4" data-thick="1" style="width:86px;height:112px"></span></div>
@@ -1177,6 +1194,19 @@ let start='tr';try{start=localStorage.getItem('arc-lang')||'tr'}catch(e){}
 if(location.hash==='#tr')start='tr';if(location.hash==='#en')start='en';
 setLang(start,false);
 
+/* ---------- fit each screen-section into one window (desktop) ---------- */
+function fitScreens(){
+  const on=matchMedia('(min-width:1101px) and (min-height:560px)').matches;
+  document.querySelectorAll('.screen').forEach(sec=>{
+    const kids=[...sec.children].filter(k=>{const ps=getComputedStyle(k).position;return ps!=='absolute'&&ps!=='fixed'});kids.forEach(k=>k.style.zoom='');
+    if(!on)return;
+    const cs=getComputedStyle(sec),pad=parseFloat(cs.paddingTop)+parseFloat(cs.paddingBottom),H=innerHeight;
+    let content=0;kids.forEach(k=>{const m=getComputedStyle(k);content+=k.getBoundingClientRect().height+parseFloat(m.marginTop)+parseFloat(m.marginBottom)});
+    if(content+pad<=H+1)return;
+    const z=Math.max(.76,(H-pad)/content);kids.forEach(k=>k.style.zoom=z.toFixed(3));
+  });
+}
+window.fitScreens=fitScreens;
 /* ---------- fit hero headline ---------- */
 function fitHero(){const h=document.querySelector('.hero h1');h.style.fontSize='';const base=parseFloat(getComputedStyle(h).fontSize);const W=h.clientWidth;let w=0;
   h.querySelectorAll('.li').forEach(l=>{l.style.display='inline-block';w=Math.max(w,l.getBoundingClientRect().width);l.style.display=''});
@@ -1185,7 +1215,7 @@ function fitHero(){const h=document.querySelector('.hero h1');h.style.fontSize='
   const fit=parseFloat(getComputedStyle(h).fontSize),over=()=>inn.offsetHeight>hero.clientHeight;
   const shrink=min=>{let fs=fit;h.style.fontSize=fs+'px';while(over()&&fs*.95>=min){fs*=.95;h.style.fontSize=fs+'px'}};
   shrink(Math.max(56,fit*.6));if(over()){hero.classList.add('tight');shrink(46)}}
-fitHero();document.fonts&&document.fonts.ready.then(fitHero);addEventListener('resize',fitHero);
+fitHero();fitScreens();document.fonts&&document.fonts.ready.then(()=>{fitHero();fitScreens();window.ScrollTrigger&&ScrollTrigger.refresh()});let _fsT;addEventListener('resize',()=>{fitHero();clearTimeout(_fsT);_fsT=setTimeout(()=>{fitScreens();window.ScrollTrigger&&ScrollTrigger.refresh()},150)});
 
 /* ---------- counters ---------- */
 function fmt(v,el){const dec=+(el.dataset.dec||0);let s=v.toFixed(dec);if(el.dataset.sep)s=Math.round(v).toLocaleString('en-US');return s+(el.dataset.suf||'')}
@@ -1363,7 +1393,7 @@ window.ARCStories=function(stories){
       E.innerHTML=links.map(u=>`<blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}?utm_source=ig_embed" data-instgrm-version="14"><a href="${esc(u)}" target="_blank" rel="noopener">Instagram</a></blockquote>`).join('');
       const run=()=>window.instgrm&&window.instgrm.Embeds.process();
       if(window.instgrm)run();else if(!document.getElementById('ig-embed-js')){const sc=document.createElement('script');sc.id='ig-embed-js';sc.async=true;sc.src='https://www.instagram.com/embed.js';sc.onload=run;document.body.appendChild(sc)}
-      if(window.ResizeObserver&&window.ScrollTrigger){let tm;new ResizeObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>ScrollTrigger.refresh(),300)}).observe(E)}
+      if(window.ResizeObserver&&window.ScrollTrigger){let tm;new ResizeObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>{fitScreens();ScrollTrigger.refresh()},300)}).observe(E)}
     }
     if(photos.length){g.hidden=false;g.innerHTML=photos.map(u=>`<a class="ig-post" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><img src="${esc(u)}" alt="Athena Run Club" loading="lazy" referrerpolicy="no-referrer" style="object-position:50% 25%"></a>`).join('');return}
     if(links.length){g.hidden=true;return}
@@ -1371,8 +1401,8 @@ window.ARCStories=function(stories){
     g.innerHTML=fallbackIG.map(f=>`<a class="ig-post" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><img src="img/${f}" alt="" loading="lazy" style="object-position:50% 25%"></a>`).join('');
   }
   function renderAll(){if(!DATA)return;renderSessions();renderInfo();renderUpdates();}
-  document.addEventListener('arc-lang',renderAll);
-  ARC.load().then(d=>{DATA=d;renderAll();renderEvents();renderIG();window.ARCStories(d.stories);window.ScrollTrigger&&ScrollTrigger.refresh()});
+  document.addEventListener('arc-lang',()=>{renderAll();setTimeout(()=>{fitScreens();window.ScrollTrigger&&ScrollTrigger.refresh()},50)});
+  ARC.load().then(d=>{DATA=d;renderAll();renderEvents();renderIG();window.ARCStories(d.stories);fitScreens();window.ScrollTrigger&&ScrollTrigger.refresh()});
 })();
 /* ---------- animation layer ---------- */
 const hasG=!!(window.gsap&&window.ScrollTrigger)&&document.documentElement.classList.contains('anim');
