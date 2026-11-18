@@ -613,14 +613,18 @@ footer{position:relative;margin-top:140px;padding-top:30px;border-top:1px solid 
   .screen.cta{justify-content:center}
   .screen h2.disp{font-size:clamp(46px,min(7vw,11vh),112px);margin:clamp(10px,1.8vh,22px) 0 clamp(12px,2.4vh,28px)}
   .screen.cta h2{font-size:clamp(58px,min(10vw,15vh),170px)}
-  .club-grid{gap:clamp(40px,5vw,90px)}
+  .club-grid{gap:clamp(40px,5vw,90px);grid-template-columns:.72fr 1.28fr}
   .club-logo{max-height:calc(100svh - 190px);aspect-ratio:1;margin-inline:auto;width:100%;max-width:calc(100svh - 190px)}
   .sched-head{margin-bottom:clamp(20px,4vh,60px)}
   .sched-grid .icard{padding:clamp(14px,2vh,24px) 22px}
   .icard .ic{margin-bottom:8px}
   .scene{height:clamp(220px,36vh,380px);margin-top:clamp(20px,4vh,70px)}
   .runs-top{gap:40px}
-  .screen .run-card{width:clamp(210px,30vh,300px)}
+  .screen .run-card{width:clamp(180px,27vh,300px)}
+  .screen .sched-grid{grid-template-columns:1fr;gap:18px}
+  .screen .sched-grid .info{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;align-items:stretch}
+  .screen .sched-grid .info>*{margin:0!important}
+  .screen .sched-grid .info>:not(.icard){grid-column:1/-1;justify-self:center}
   .screen .rail-ui{margin-top:14px}
 }
 .hero-story{position:absolute;z-index:4;right:max(5vw,calc((100vw - 1280px)/2));top:118px;color:#fff;padding:10px 18px 10px 10px;border-radius:99px;background:rgba(5,15,31,.45);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid var(--hairL)}
