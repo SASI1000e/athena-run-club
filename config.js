@@ -5,7 +5,7 @@
   Web App URL between the quotes below. Leave it empty to run in DEMO mode
   (sample data, changes saved only in this browser).
 */
-window.ARC_API = "";
+window.ARC_API = "https://script.google.com/macros/s/AKfycbxplnW4qGr019USi7iC7-2zTXlQ0qgk5I4FoGmzYzGF0uXU5YIpALKpl3zSUgO8DXLCmw/exec";
 
 /*
   Instagram feed (optional) – automatic latest posts from @athena.runclub
