@@ -552,6 +552,8 @@ footer{position:relative;margin-top:140px;padding-top:30px;border-top:1px solid 
 .ig-post:hover img{transform:scale(1.08)}
 .ig-post .cap{position:absolute;inset:0;display:flex;align-items:flex-end;padding:14px;background:linear-gradient(transparent 40%,rgba(5,15,31,.85));color:#fff;font-size:12.5px;line-height:1.35;opacity:0;transition:opacity .4s}
 .ig-post:hover .cap{opacity:1}
+.igrid.emb{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:18px;align-items:start}
+.igrid.emb .instagram-media{min-width:0!important;max-width:100%!important;width:100%!important;margin:0!important;border-radius:20px!important;box-shadow:0 20px 50px -30px rgba(5,15,31,.45)!important;border:1px solid rgba(5,15,31,.08)!important}
 .ig-post .typ{position:absolute;top:10px;right:10px;width:26px;height:26px;border-radius:50%;background:rgba(5,15,31,.5);display:grid;place-items:center;color:#fff}
 .ig-post .typ svg{width:14px;height:14px}
 
@@ -1072,8 +1074,8 @@ html.no-anim .w{opacity:1}
 </div>
 <div class="mbar" id="mbar"><a class="btn btn-gold" href="#join" data-go><span class="track-mini"><span class="rn btn-run" data-d=".55s" data-c="#050f1f" data-thick="1" aria-hidden="true"></span><span class="rn btn-run" data-d=".6s" data-c="#16407a" data-nopony="1" data-thick="1" aria-hidden="true"></span><span class="rn btn-run" data-d=".52s" data-c="#0c2a52" data-thick="1" aria-hidden="true"></span><span class="rn btn-run" data-d=".64s" data-c="#3d5f92" data-nopony="1" data-thick="1" aria-hidden="true"></span></span><span data-i="n6">Join the club</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
 
-<script src="config.js?v=6"></script>
-<script src="arc-data.js?v=6"></script>
+<script src="config.js?v=7"></script>
+<script src="arc-data.js?v=7"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
@@ -1338,6 +1340,16 @@ window.ARCStories=function(stories){
     const posts=await ARC.instagram(DATA.instagram);const g=$('igrid');
     const typ={VIDEO:'<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>',CAROUSEL_ALBUM:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="7" y="7" width="13" height="13" rx="2"/><path d="M4 16V5a1 1 0 0 1 1-1h11"/></svg>'};
     if(posts.length){g.innerHTML=posts.slice(0,6).map(p=>`<a class="ig-post" href="${esc(safeUrl(p.permalink)||'https://www.instagram.com/athena.runclub/')}" target="_blank" rel="noopener"><img src="${esc(p.image)}" alt="" loading="lazy">${typ[p.mediaType]?`<span class="typ">${typ[p.mediaType]}</span>`:''}<span class="cap">${esc(String(p.caption||'').slice(0,120))}</span></a>`).join('');return}
+    const links=String((DATA.settings||{}).igPosts||'').split(/\s+/).filter(u=>/^https:\/\/www\.instagram\.com\/(p|reel)\/[\w-]+\/$/.test(u)).slice(0,6);
+    if(links.length){
+      g.classList.add('emb');
+      g.innerHTML=links.map(u=>`<blockquote class="instagram-media" data-instgrm-permalink="${esc(u)}?utm_source=ig_embed" data-instgrm-version="14"><a href="${esc(u)}" target="_blank" rel="noopener">Instagram</a></blockquote>`).join('');
+      const run=()=>window.instgrm&&window.instgrm.Embeds.process();
+      if(window.instgrm)run();else if(!document.getElementById('ig-embed-js')){const sc=document.createElement('script');sc.id='ig-embed-js';sc.async=true;sc.src='https://www.instagram.com/embed.js';sc.onload=run;document.body.appendChild(sc)}
+      if(window.ResizeObserver&&window.ScrollTrigger){let tm;new ResizeObserver(()=>{clearTimeout(tm);tm=setTimeout(()=>ScrollTrigger.refresh(),300)}).observe(g)}
+      return;
+    }
+    g.classList.remove('emb');
     g.innerHTML=fallbackIG.map(f=>`<a class="ig-post" href="https://www.instagram.com/athena.runclub/" target="_blank" rel="noopener"><img src="img/${f}" alt="" loading="lazy" style="object-position:50% 25%"></a>`).join('');
   }
   function renderAll(){if(!DATA)return;renderSessions();renderInfo();renderUpdates();}
