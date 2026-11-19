@@ -201,7 +201,8 @@ nav.solid .nav-in{background:rgba(5,15,31,.82)}
 .coach{padding:150px 0 140px;background:var(--paper)}
 .coach-head{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:end;margin-bottom:90px}
 .coach-grid{display:grid;grid-template-columns:1fr 1fr;gap:90px;align-items:start}
-.frame{position:sticky;top:110px;aspect-ratio:4/5;border-radius:36px;overflow:hidden;background:var(--navy);box-shadow:0 60px 110px -60px rgba(5,15,31,.6)}
+.coach-grid>.frame{align-self:start}
+.frame{position:sticky;top:max(96px,calc((100svh - min(calc(100svh - 130px),calc((100cqw - 90px) * .625)))/2 + 30px));height:min(calc(100svh - 130px),calc((100cqw - 90px) * .625));width:auto;max-width:100%;aspect-ratio:4/5;justify-self:center;border-radius:36px;overflow:hidden;background:var(--navy);box-shadow:0 60px 110px -60px rgba(5,15,31,.6)}
 .frame img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transform:scale(1.12);transition:opacity 1s var(--ease),transform 1.6s var(--ease)}
 .frame img.on{opacity:1;transform:scale(1)}
 .frame .fc{position:absolute;left:24px;bottom:22px;z-index:2;display:flex;align-items:baseline;gap:8px;color:#fff;font-family:var(--disp);font-stretch:100%;font-weight:800;font-size:51.2px;line-height:1;text-shadow:0 6px 30px rgba(0,0,0,.4)}
@@ -931,7 +932,7 @@ html.no-anim .w{opacity:1}
       </div>
       <p class="lead rv" data-i="s8">Personal trainer, run coach and the founder of Athena Run Club. She coaches every member personally and for free, because her goal is simple: to help everyone train and live healthier. This is her story, in her own words: it all started outside.</p>
     </div>
-    <div class="coach-grid">
+    <div class="coach-grid" style="container-type:inline-size">
       <div class="frame" id="frame">
         <img src="img/summit.jpg" alt="" class="on" style="object-position:50% 45%">
         <img src="img/tennis.jpg" alt="" style="object-position:50% 70%">
